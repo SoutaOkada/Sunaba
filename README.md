@@ -17,6 +17,9 @@
 他ユーザーの制作物を見てアイデアを得たり、楽しみたいとき。
 自身の成果物を共有し、意見を募ったり、楽しみたいとき。
 
+## 機能一覧
+https://docs.google.com/spreadsheets/d/1oToIn5i-iffj-CaXGi_IBBspxlaV8LYWbtzpGWpPUzY/edit?usp=sharing
+
 ## 設計書
 <...>
 

@@ -30,7 +30,7 @@
 - 自身の成果を共有し、意見を募ったり、反応を得たいとき。
 - 同じ嗜好のプレイヤーと交流したいとき。
 - 新しいゲームの購入を検討する際、そのゲームに関するトピックを見て実際のプレイ内容を把握したいとき。
-- 動画投稿などで活動するゲーマーの宣伝の場所として。
+- 動画投稿サイトなどで活動するゲーマーの宣伝の場所として。
 
 ## 機能一覧
 https://docs.google.com/spreadsheets/d/1oToIn5i-iffj-CaXGi_IBBspxlaV8LYWbtzpGWpPUzY/edit?usp=sharing

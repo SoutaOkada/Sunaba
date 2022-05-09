@@ -6,7 +6,7 @@
 世界一売れたゲームであるMinecraftやTerraria、SimCity、近年ではCraftopiaやCities:Skylines、Factorio、Planet Coasterなどが有名です。  
 このサイトでは自身のプレイ内容や知見を発信し、他ゲーマーから反応や意見を交換し合うことができます。  
 また、リプライ機能で交流を深め、仲良くなったユーザーや気に入ったユーザーをフォローし、いつでも投稿を見ることができます。  
-他ユーザーのプロフィールから外部のチャットツールやゲームプラットフォーム、動画サイト、SNSなどへのリンクを行い、コミュニティのハブとなるサイトです。
+他ユーザーのプロフィールから外部のチャットツールやゲームプラットフォーム、動画サイト、SNSなどへのリンクを行い、コミュニティのハブとなるサイトです。  
 なお、著作権に配慮し、ゲーム画面などの画像投稿機能などは実装されていません。  
 
 ### サイトテーマ
@@ -33,10 +33,16 @@
 - 動画投稿サイトなどで活動するゲーマーの宣伝の場所として。
 
 ## 機能一覧
-https://docs.google.com/spreadsheets/d/1oToIn5i-iffj-CaXGi_IBBspxlaV8LYWbtzpGWpPUzY/edit?usp=sharing
+- https://docs.google.com/spreadsheets/d/1oToIn5i-iffj-CaXGi_IBBspxlaV8LYWbtzpGWpPUzY/edit?usp=sharing
 
 ## 設計書
-<...>
+- https://docs.google.com/spreadsheets/d/1xysFD4YxDQTDcMjbQkrRYFVYFIeJ5F2aQ18mCPsSZSA/edit?usp=sharing
+
+## ER図
+- https://docs.google.com/spreadsheets/d/1xysFD4YxDQTDcMjbQkrRYFVYFIeJ5F2aQ18mCPsSZSA/edit?usp=sharing
+
+## UI Flow
+- https://drive.google.com/file/d/1NehabbN-jOwv-BsK7xyXO8rSx5xnKtM1/view?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)

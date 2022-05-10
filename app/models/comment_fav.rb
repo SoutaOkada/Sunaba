@@ -1,6 +1,6 @@
 class CommentFav < ApplicationRecord
   
-  belongs_to :comments
-  belongs_to :users
+  belongs_to :comment
+  belongs_to :user
   
 end

@@ -1,0 +1,2 @@
+class PostFav < ApplicationRecord
+end

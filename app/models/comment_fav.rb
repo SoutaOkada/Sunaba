@@ -1,0 +1,2 @@
+class CommentFav < ApplicationRecord
+end

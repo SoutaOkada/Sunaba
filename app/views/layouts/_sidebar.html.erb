@@ -1,11 +1,37 @@
 <div>
 
-  <div>
-    <h1>LOGO</h1>
-  </div>
+  <% if admin_signed_in? %>
 
-  <div>
+    <div>
+      <h1>LOGO</h1>
+    </div>
 
-  </div>
+    <div>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+    </div>
+
+  <% elsif user_signed_in? %>
+
+    <div>
+      <h1>LOGO</h1>
+    </div>
+
+    <div>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    </div>
+
+  <% else %>
+
+    <div>
+      <h1>LOGO</h1>
+    </div>
+
+    <div>
+      <%= link_to "新規登録", new_user_registration_path %>
+
+      <%= link_to "ログイン", new_user_session_path %>
+    </div>
+
+  <% end %>
 
 </div>

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
 
+  root 'public/homes#top'
+
   namespace :public do
     get 'homes/top'
   end

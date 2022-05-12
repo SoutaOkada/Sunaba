@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+
   devise_for :admins, controllers: {
       sessions: 'admin/sessions'
   }
 
-  devise_for :users
+  devise_for :users, controllers: {
+      registrations: 'public/registrations',
+      sessions: 'public/sessions'
+  }
+
 
   root 'public/homes#top'
 

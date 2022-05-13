@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_13_154734) do
+ActiveRecord::Schema.define(version: 2022_05_13_155707) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -80,10 +80,10 @@ ActiveRecord::Schema.define(version: 2022_05_13_154734) do
     t.string "name"
     t.integer "birth_date"
     t.integer "gender"
-    t.boolean "open_gender"
+    t.boolean "open_gender", default: false
     t.string "nickname"
     t.string "self_intro"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

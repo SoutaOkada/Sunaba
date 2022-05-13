@@ -28,12 +28,17 @@
       </div>
 
       <div class="field">
+        <%= f.label :name, "氏名"%><br />
+        <%= f.text_field :name, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
         <%= f.label :birth_date, "生年月日" %><br />
         <%= f.text_field :birth_date, autocomplete: "off" %>
       </div>
 
       <div class="field">
-        <%= f.label :gender, "性別" %>
+        <%= f.label :gender, "性別" %><br />
 
         <%= f.radio_button :gender, :male %>
           <%= f.label :gender, "男性" %>
@@ -44,7 +49,7 @@
       </div>
 
       <div class="field">
-        <%= f.label :open_gender, "性別の公開" %>
+        <%= f.label :open_gender, "性別の公開" %><br />
 
         <%= f.radio_button :open_gender, :false, checked: true %>
           <%= f.label :open_gender, "非公開" %>
@@ -53,12 +58,12 @@
       </div>
 
       <div class="field">
-        <%= f.label :nickname, "ニックネーム" %>
+        <%= f.label :nickname, "ニックネーム" %><br />
         <%= f.text_field :nickname, autocomplete: "off" %>
       </div>
 
       <div class="field">
-        <%= f.label :self_intro, "自己紹介" %>
+        <%= f.label :self_intro, "自己紹介" %><br />
         <%= f.text_area :self_intro %>
       </div>
 

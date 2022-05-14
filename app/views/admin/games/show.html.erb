@@ -25,4 +25,24 @@
 
     </table>
   </div>
+
+  <div>
+    <div>
+      <h2>リンクを追加</h2>
+    </div>
+
+    <div>
+      <%= form_with model: @game_link, url: admin_game_links_path  do |f| %>
+
+        <%= f.label :link_title, "サイト名" %>
+        <%= f.text_field :link_title %>
+
+        <%= f.label :link, "URL" %>
+        <%= f.text_field :link %>
+
+        <%= f.submit "作成" %>
+      <% end %>
+    </div>
+  </div>
+
 </div>

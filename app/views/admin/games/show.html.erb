@@ -38,6 +38,7 @@
         <tr>
           <td><%= game_link.link_title %></td>
           <td><%= game_link.link %></td>
+          <td><%= link_to "編集", admin_game_link_path(game_link.id) %></td>
         </tr>
       <% end %>
 

@@ -15,6 +15,7 @@ class Admin::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @game_links = GameLink.where(:id == @game.id)
   end
 
   def edit

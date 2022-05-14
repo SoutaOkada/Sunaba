@@ -3,3 +3,26 @@
     <%= @game.game_title %>
   </h1>
 </div>
+
+<div>
+  <div>
+    <h2>外部リンク</h2>
+  </div>
+
+  <div>
+    <table class="table col-4 text-light">
+      <tr>
+        <th>title</th>
+        <th>url</th>
+      </tr>
+
+      <% @game_links.each do |game_link| %>
+        <tr>
+          <td><%= game_link.link_title %></td>
+          <td><%= game_link.link %></td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+</div>

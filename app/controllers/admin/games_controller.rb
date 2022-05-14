@@ -23,6 +23,9 @@ class Admin::GamesController < ApplicationController
   end
 
   def update
+    @game = Game.find(params[:id])
+    @game.update(game_params)
+    redirect_to request.referer
   end
 
   private

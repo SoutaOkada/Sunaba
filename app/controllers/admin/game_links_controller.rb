@@ -6,7 +6,6 @@ class Admin::GameLinksController < ApplicationController
     @game_link = GameLink.new(game_link_params)
     @game_link.game_id = params[:game_id]
     @game_link.save
-    # binding.pry
     redirect_to request.referer
   end
 

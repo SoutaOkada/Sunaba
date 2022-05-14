@@ -6,11 +6,29 @@
 
 <div>
   <div>
+    <h3>タイトル編集</h3>
+  </div>
+
+  <div>
+    <%= form_with model: @game, url: admin_game_path, method: :patch do |f| %>
+      <%= f.label :game_title, "タイトル" %>
+      <%= f.text_field :game_title %>
+
+      <%= f.submit "更新" %>
+    <% end %>
+  </div>
+</div>
+
+<div>
+
+  <div>
     <h2>外部リンク</h2>
   </div>
 
   <div>
+
     <table class="table col-4 text-light">
+
       <tr>
         <th>title</th>
         <th>url</th>
@@ -24,9 +42,11 @@
       <% end %>
 
     </table>
+
   </div>
 
   <div>
+
     <div>
       <h2>リンクを追加</h2>
     </div>
@@ -43,6 +63,7 @@
         <%= f.submit "作成" %>
       <% end %>
     </div>
+
   </div>
 
 </div>

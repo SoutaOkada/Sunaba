@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     if current_user
       root_path
     else
-      admin_homes_top_path
+      admin_games_path
     end
   end
 

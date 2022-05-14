@@ -1,6 +1,7 @@
 class Admin::GamesController < ApplicationController
   def index
     @game = Game.new
+    @games = Game.all
   end
 
   def new

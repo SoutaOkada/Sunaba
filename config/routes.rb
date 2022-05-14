@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     resources :games, only: [:index, :new, :create, :show, :edit, :update]
 
-    resources :game_links, only: [:show, :create, :update, :destroy]
+    resources :game_links, only: [:show, :create, :edit, :update, :destroy]
 
   end
 

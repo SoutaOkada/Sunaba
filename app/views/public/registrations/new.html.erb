@@ -67,9 +67,15 @@
         <%= f.text_area :self_intro %>
       </div>
 
+      <div class="field">
+        <%= f.label :image, "アイコン画像" %><br />
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+
       <div class="actions">
         <%= f.submit "登録" %>
       </div>
+
     <% end %>
 
   </div>

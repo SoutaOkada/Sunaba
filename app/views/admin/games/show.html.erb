@@ -32,7 +32,7 @@
     </div>
 
     <div>
-      <%= form_with model: @game_link, url: admin_game_links_path  do |f| %>
+      <%= form_with model: @game_link, url: admin_game_links_path(game_id: params[:id])  do |f| %>
 
         <%= f.label :link_title, "サイト名" %>
         <%= f.text_field :link_title %>

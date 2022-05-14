@@ -4,9 +4,10 @@ class Admin::GameLinksController < ApplicationController
 
   def create
     @game_link = GameLink.new(game_link_params)
-    @game_link.game = params[:id]
+    @game_link.game_id = params[:game_id]
     @game_link.save
-    redirect_to admin_game_path(params[:id])
+    # binding.pry
+    redirect_to request.referer
   end
 
   def update

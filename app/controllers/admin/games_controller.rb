@@ -15,7 +15,7 @@ class Admin::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @game_links = GameLink.where(:id == @game.id)
+    @game_links = GameLink.where(game_id: (params[:id]))
     @game_link = GameLink.new
   end
 

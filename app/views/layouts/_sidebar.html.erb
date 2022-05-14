@@ -10,6 +10,10 @@
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     </div>
 
+    <div>
+      <%= link_to "ゲーム一覧", admin_games_path %>
+    </div>
+
   <% elsif user_signed_in? %>
 
     <div>

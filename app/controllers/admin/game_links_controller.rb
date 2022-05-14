@@ -9,7 +9,14 @@ class Admin::GameLinksController < ApplicationController
     redirect_to request.referer
   end
 
+  def edit
+    @game_link = GameLink.find(params[:id])
+  end
+
   def update
+    @game_link = GameLink.find(params[:id])
+    @game_link.update(game_link_params)
+    redirect_to admin_game_path(@game_link.game_id)
   end
 
   def destroy

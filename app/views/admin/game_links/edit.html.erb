@@ -1,3 +1,21 @@
 <div>
-  <h1>リンク編集</h1>
+  <div>
+    <h1>リンク編集</h1>
+  </div>
+
+  <div>
+    <%= form_with model: @game_link, url:admin_game_link_path, method: :patch do |f| %>
+      <div>
+        <%= f.label :link_title, "サイト名" %><br />
+        <%= f.text_field :link_title %>
+      </div>
+
+      <div>
+        <%= f.label :link, "URL" %><br />
+        <%= f.text_field :link %>
+      </div>
+
+      <%= f.submit "作成" %>
+    <% end %>
+  </div>
 </div>

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get 'homes/top'
 
     resources :games, only: [:index, :new, :create, :show, :edit, :update]
+    
+    resources :game_links, only: [:show, :create, :update, :destroy]
 
   end
 

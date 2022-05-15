@@ -13,12 +13,13 @@ Rails.application.routes.draw do
   root 'public/homes#top'
 
   namespace :public do
+    
     get 'homes/top'
+    
   end
 
   namespace :admin do
-    get 'homes/top'
-
+    
     resources :games, only: [:index, :new, :create, :show, :edit, :update]
 
     resources :game_links, only: [:show, :create, :edit, :update, :destroy]

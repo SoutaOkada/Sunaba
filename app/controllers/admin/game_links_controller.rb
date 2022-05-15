@@ -20,6 +20,9 @@ class Admin::GameLinksController < ApplicationController
   end
 
   def destroy
+    @game_link = GameLink.find(params[:id])
+    @game_link.destroy
+    redirect_to admin_game_path(@game_link.game_id)
   end
 
   private

@@ -33,6 +33,7 @@
         <th>title</th>
         <th>url</th>
         <th></th>
+        <th></th>
       </tr>
 
       <% @game_links.each do |game_link| %>
@@ -40,6 +41,7 @@
           <td><%= game_link.link_title %></td>
           <td><%= game_link.link %></td>
           <td><%= link_to "編集", edit_admin_game_link_path(game_link.id) %></td>
+          <td><%= link_to "削除", admin_game_link_path(game_link.id), method: :delete %></td>
         </tr>
       <% end %>
 

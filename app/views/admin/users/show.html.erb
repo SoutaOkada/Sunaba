@@ -25,7 +25,13 @@
 
       <tr>
         <td>性別の公開</td>
-        <td><%= @user.open_gender %></td>
+        <td>
+          <% if @user.open_gender == false %>
+            <%= "非公開" %>
+          <% else %>
+            <%= "公開" %>
+          <% end %>
+        </td>
       </tr>
 
       <tr>

@@ -6,13 +6,18 @@
 
 <div>
   <div>
-    <h3>タイトル編集</h3>
+    <h3>ゲーム編集</h3>
   </div>
 
   <div>
     <%= form_with model: @game, url: admin_game_path, method: :patch do |f| %>
       <%= f.label :game_title, "タイトル" %>
       <%= f.text_field :game_title %>
+
+      <%= f.radio_button :is_active, :true %>
+      <%= f.label :is_active, "公開" %>
+      <%= f.radio_button :is_active, :false %>
+      <%= f.label :is_active, "削除" %>
 
       <%= f.submit "更新" %>
     <% end %>
@@ -23,6 +28,27 @@
 
   <div>
     <h2>外部リンク</h2>
+  </div>
+  
+  <div>
+
+    <div>
+      <h2>リンクを追加</h2>
+    </div>
+
+    <div>
+      <%= form_with model: @game_link, url: admin_game_links_path(game_id: params[:id])  do |f| %>
+
+        <%= f.label :link_title, "サイト名" %>
+        <%= f.text_field :link_title %>
+
+        <%= f.label :link, "URL" %>
+        <%= f.text_field :link %>
+
+        <%= f.submit "作成" %>
+      <% end %>
+    </div>
+
   </div>
 
   <div>
@@ -46,27 +72,6 @@
       <% end %>
 
     </table>
-
-  </div>
-
-  <div>
-
-    <div>
-      <h2>リンクを追加</h2>
-    </div>
-
-    <div>
-      <%= form_with model: @game_link, url: admin_game_links_path(game_id: params[:id])  do |f| %>
-
-        <%= f.label :link_title, "サイト名" %>
-        <%= f.text_field :link_title %>
-
-        <%= f.label :link, "URL" %>
-        <%= f.text_field :link %>
-
-        <%= f.submit "作成" %>
-      <% end %>
-    </div>
 
   </div>
 

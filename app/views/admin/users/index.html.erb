@@ -8,6 +8,7 @@
     <table class="table col-6 text-light">
       <tr>
         <th>id</th>
+        <th></th>
         <th>ユーザー名</th>
         <th>ニックネーム</th>
         <th>ステータス</th>
@@ -16,6 +17,8 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
+
+          <td><%= image_tag user.image, size: '40x40' %></td>
 
           <td>
             <%= link_to admin_user_path(user.id) do %>

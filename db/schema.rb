@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_14_082921) do
+ActiveRecord::Schema.define(version: 2022_05_15_120525) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2022_05_14_082921) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.integer "birth_date"
+    t.date "birth_date", null: false
     t.integer "gender"
     t.boolean "open_gender", default: false
     t.string "nickname"

@@ -5,10 +5,11 @@
   </div>
 
   <div>
-    <table class="table col-4 text-light">
+    <table class="table col-6 text-light">
       <tr>
         <th>id</th>
         <th>ユーザー名</th>
+        <th>ニックネーム</th>
         <th>ステータス</th>
       </tr>
 
@@ -20,6 +21,10 @@
             <%= link_to admin_user_path(user.id) do %>
               <%= user.name %>
             <% end %>
+          </td>
+
+          <td>
+            <%= user.nickname %>
           </td>
 
           <td>

@@ -12,14 +12,19 @@ Rails.application.routes.draw do
 
   root 'public/homes#top'
 
-  namespace :public do
-    
+  scope module: :public do
+
     get 'homes/top'
-    
+
+    resources :users, only: [:show, :edit, :update]
+    get 'users/other_user' => "users#other_user"
+    get 'users/confirm' => "users#confirm"
+    get 'users/withdrawal' => "users#withdrawal"
+
   end
 
   namespace :admin do
-    
+
     resources :games, only: [:index, :new, :create, :show, :edit, :update]
 
     resources :game_links, only: [:show, :create, :edit, :update, :destroy]

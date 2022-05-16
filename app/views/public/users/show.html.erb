@@ -9,6 +9,9 @@
       <% end %>
     </div>
 
+    <div>
+      <%= image_tag @user.image, size: '80x80' %>
+    </div>
 
     <div>
         <% if current_user.id == @user.id %>

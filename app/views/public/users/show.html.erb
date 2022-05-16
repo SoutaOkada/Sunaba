@@ -3,51 +3,55 @@
   <div>
 
     <div>
-      <h1>マイページ</h1>
+      <% if current_user.id == @user.id %>
+        <h1>マイページ</h1>
+      <% else %>
+        <h1><%= @user.nickname %>さんのプロフィール</h1>
+      <% end %>
     </div>
 
     <div>
+        <% if current_user.id == @user.id %>
+          <div>
+            <div>
+              <h3>登録情報</h3>
+            </div>
+
+            <div>
+
+              <table class="table col-5 text-light">
+
+                <tr>
+                  <th>氏名</th>
+                  <td><%= @user.name %></td>
+                </tr>
+
+                <tr>
+                  <th>メールアドレス</th>
+                  <td><%= @user.email %></td>
+                </tr>
+
+                <tr>
+                  <th>生年月日</th>
+                  <td><%= @user.birth_date %></td>
+                </tr>
+
+                <tr>
+                  <th>性別</th>
+                  <td><%= @user.gender_i18n %></td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        <% end %>
 
       <div>
 
         <div>
-          <h3>登録情報</h3>
-        </div>
-
-        <div>
-
-          <table class="table col-5 text-light">
-
-            <tr>
-              <th>氏名</th>
-              <td><%= @user.name %></td>
-            </tr>
-
-            <tr>
-              <th>メールアドレス</th>
-              <td><%= @user.email %></td>
-            </tr>
-
-            <tr>
-              <th>生年月日</th>
-              <td><%= @user.birth_date %></td>
-            </tr>
-
-            <tr>
-              <th>性別</th>
-              <td><%= @user.gender_i18n %></td>
-            </tr>
-
-          </table>
-
-        </div>
-
-      </div>
-
-      <div>
-
-        <div>
-          <h3>公開プロフィール</h3>
+          <% if current_user.id == @user.id %>
+            <h3>公開プロフィール</h3>
+          <% end %>
         </div>
 
         <div>
@@ -59,16 +63,18 @@
               <td><%= @user.nickname %></td>
             </tr>
 
-            <tr>
-              <th>性別の公開</th>
-              <td>
-                <% if @user.open_gender == false %>
-                  <%= "非公開" %>
-                <% else %>
-                  <%= "公開" %>
-                <% end %>
-              </td>
-            </tr>
+            <% if current_user.id == @user.id %>
+              <tr>
+                <th>性別の公開</th>
+                <td>
+                  <% if @user.open_gender == false %>
+                    <%= "非公開" %>
+                  <% else %>
+                    <%= "公開" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
 
             <tr>
               <th>自己紹介</th>

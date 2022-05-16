@@ -1,5 +1,4 @@
 <div>
-
   <div>
 
     <div>
@@ -55,7 +54,6 @@
         </div>
 
         <div>
-
           <table class="table col-5 text-light">
 
             <tr>
@@ -82,13 +80,16 @@
             </tr>
 
           </table>
-
         </div>
 
       </div>
 
     </div>
-
   </div>
 
+  <% if current_user.id == @user.id %>
+    <div>
+      <%= link_to "編集", edit_user_path(@user.id) %>
+    </div>
+  <% end %>
 </div>

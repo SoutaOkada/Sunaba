@@ -9,6 +9,7 @@
       <% end %>
     </div>
 
+
     <div>
         <% if current_user.id == @user.id %>
           <div>
@@ -72,6 +73,11 @@
                   <% end %>
                 </td>
               </tr>
+            <% else %>
+              <% if @user.open_gender == true %>
+                <th>性別</th>
+                <td><%= @user.gender_i18n %></td>
+              <% end %>
             <% end %>
 
             <tr>

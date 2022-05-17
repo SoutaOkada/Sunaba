@@ -3,9 +3,6 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def other_user
-  end
-
   def edit
     @user = User.find(params[:id])
   end
@@ -20,6 +17,10 @@ class Public::UsersController < ApplicationController
   end
 
   def withdrawal
+    @user = current_user
+    @user.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
   private

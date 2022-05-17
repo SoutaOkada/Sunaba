@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
     get 'homes/top'
 
-    get 'users/other_user' => "users#other_user"
     get 'users/confirm' => "users#confirm"
     get 'users/withdrawal' => "users#withdrawal"
     resources :users, only: [:show, :edit, :update]

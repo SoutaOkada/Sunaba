@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   scope module: :public do
 
-    get 'homes/top'
+
+    resources :games, only: [:index, :show]
 
     get 'users/confirm' => "users#confirm"
     get 'users/withdrawal' => "users#withdrawal"

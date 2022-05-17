@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
     get 'users/confirm' => "users#confirm"
     get 'users/withdrawal' => "users#withdrawal"
+    get 'users/withdrawn' => "users#withdrawn"
     resources :users, only: [:show, :edit, :update]
 
   end

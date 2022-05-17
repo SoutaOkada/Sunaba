@@ -1,6 +1,9 @@
 class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    if @user.is_active == false
+      redirect_to users_withdrawn_path
+    end
   end
 
   def edit
@@ -21,6 +24,9 @@ class Public::UsersController < ApplicationController
     @user.update(is_active: false)
     reset_session
     redirect_to root_path
+  end
+
+  def withdrawn
   end
 
   private

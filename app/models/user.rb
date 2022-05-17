@@ -15,4 +15,8 @@ class User < ApplicationRecord
   has_many :post_favs
   has_many :comment_favs
 
+  def active_for_authentication?
+    super && (is_active == true)
+  end
+
 end

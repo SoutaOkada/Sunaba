@@ -1,2 +1,21 @@
-<h1>Public::Games#show</h1>
-<p>Find me in app/views/public/games/show.html.erb</p>
+<div>
+  <h1>
+    <%= @game.game_title %>
+  </h1>
+</div>
+
+<div>
+  <table class="table col-2 text-light">
+    <% @game.game_links.each do |game_link| %>
+      <tr>
+        <td>
+          <%= game_link.link_title %>
+        </td>
+
+        <td>
+          <a href="<%= game_link.link %>">link</a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

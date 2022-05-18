@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get 'users/withdrawn' => "users#withdrawn"
     resources :users, only: [:show, :edit, :update]
 
+    resources :posts, only: [:create, :show, :update]
+
   end
 
   namespace :admin do

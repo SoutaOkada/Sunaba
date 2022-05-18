@@ -5,5 +5,6 @@ class Public::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @post = Post.new
   end
 end

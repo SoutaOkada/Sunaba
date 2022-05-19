@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_162524) do
+ActiveRecord::Schema.define(version: 2022_05_19_162908) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -96,6 +96,10 @@ ActiveRecord::Schema.define(version: 2022_05_19_162524) do
   create_table "post_favs", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "game_id"
+    t.integer "post_id"
+    t.index ["game_id"], name: "index_post_favs_on_game_id"
+    t.index ["post_id"], name: "index_post_favs_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -146,6 +150,8 @@ ActiveRecord::Schema.define(version: 2022_05_19_162524) do
   add_foreign_key "follow_games", "games"
   add_foreign_key "follow_games", "users"
   add_foreign_key "game_links", "games"
+  add_foreign_key "post_favs", "games"
+  add_foreign_key "post_favs", "posts"
   add_foreign_key "posts", "games"
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users"

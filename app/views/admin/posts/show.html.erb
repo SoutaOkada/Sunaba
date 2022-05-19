@@ -42,6 +42,24 @@
               <% end %>
             </td>
             <td><%= comment.text %></td>
+            <td>
+              <% if comment.is_active == true %>
+                公開
+              <% else %>
+                削除
+              <% end %>
+            </td>
+            <td>
+              <%= form_with model: comment, url: admin_comment_path, method: :patch do |f| %>
+
+                <%= f.radio_button :is_active, :true %>
+                <%= f.label :is_active, "公開" %>
+                <%= f.radio_button :is_active, :false %>
+                <%= f.label :is_active, "削除" %>
+
+                <%= f.submit "更新" %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>

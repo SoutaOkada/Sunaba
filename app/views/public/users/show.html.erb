@@ -62,7 +62,7 @@
           <table class="table col-5 text-light">
 
             <tr>
-              <th>ニックネーム</th>
+              <th>ユーザー名</th>
               <td><%= @user.nickname %></td>
             </tr>
 
@@ -113,22 +113,19 @@
       <table class="table text-light">
 
           <tr>
+            <th>ゲーム</th>
             <th>タイトル</th>
-            <th>投稿者</th>
             <th>投稿日時</th>
           </tr>
 
         <% @posts.each do |one_post| %>
           <tr>
             <td>
-              <%= link_to post_path(one_post.id) do %>
-                <%= one_post.title %>
-              <% end %>
+              <%= one_post.game.game_title %>
             </td>
             <td>
-              <%= link_to user_path(one_post.user.id) do %>
-                <%= image_tag one_post.user.image, size:'30x30' %>
-                <%= one_post.user.nickname %>
+              <%= link_to post_path(one_post.id) do %>
+                <%= one_post.title %>
               <% end %>
             </td>
             <td>

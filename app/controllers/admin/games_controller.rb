@@ -17,6 +17,7 @@ class Admin::GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game_links = GameLink.where(game_id: (params[:id]))
     @game_link = GameLink.new
+    @posts = Post.where(game_id: (params[:id]))
   end
 
   def edit

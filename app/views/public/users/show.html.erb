@@ -11,6 +11,7 @@
 
     <div>
       <%= image_tag @user.image, size: '80x80' %>
+      <%= render 'public/relationships/follow_button', user: @user %>
     </div>
 
     <div>

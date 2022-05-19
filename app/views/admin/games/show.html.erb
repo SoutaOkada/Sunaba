@@ -1,78 +1,95 @@
-<div>
+<div class="row">
   <h1>
     <%= @game.game_title %>
   </h1>
 </div>
 
-<div>
-  <div>
-    <h3>ゲーム編集</h3>
-  </div>
-
-  <div>
-    <%= form_with model: @game, url: admin_game_path, method: :patch do |f| %>
-      <%= f.label :game_title, "タイトル" %>
-      <%= f.text_field :game_title %>
-
-      <%= f.radio_button :is_active, :true %>
-      <%= f.label :is_active, "公開" %>
-      <%= f.radio_button :is_active, :false %>
-      <%= f.label :is_active, "削除" %>
-
-      <%= f.submit "更新" %>
-    <% end %>
-  </div>
-</div>
-
-<div>
-
-  <div>
-    <h2>外部リンク</h2>
-  </div>
-  
-  <div>
-
+<div class="row">
+  <div class="col-5">
     <div>
-      <h2>リンクを追加</h2>
+      <h3>ゲーム編集</h3>
     </div>
 
     <div>
-      <%= form_with model: @game_link, url: admin_game_links_path(game_id: params[:id])  do |f| %>
+      <%= form_with model: @game, url: admin_game_path, method: :patch do |f| %>
+        <%= f.label :game_title, "タイトル" %>
+        <%= f.text_field :game_title %>
 
-        <%= f.label :link_title, "サイト名" %>
-        <%= f.text_field :link_title %>
+        <%= f.radio_button :is_active, :true %>
+        <%= f.label :is_active, "公開" %>
+        <%= f.radio_button :is_active, :false %>
+        <%= f.label :is_active, "削除" %>
 
-        <%= f.label :link, "URL" %>
-        <%= f.text_field :link %>
-
-        <%= f.submit "作成" %>
+        <%= f.submit "更新" %>
       <% end %>
     </div>
 
+    <div>
+      <h2>外部リンク</h2>
+    </div>
+
+    <div>
+
+      <div>
+        <h2>リンクを追加</h2>
+      </div>
+
+      <div>
+        <%= form_with model: @game_link, url: admin_game_links_path(game_id: params[:id])  do |f| %>
+
+          <%= f.label :link_title, "サイト名" %>
+          <%= f.text_field :link_title %>
+
+          <%= f.label :link, "URL" %>
+          <%= f.text_field :link %>
+
+          <%= f.submit "作成" %>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div>
+
+      <table class="table col-4 text-light">
+
+        <tr>
+          <th>title</th>
+          <th>url</th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @game_links.each do |game_link| %>
+          <tr>
+            <td><%= game_link.link_title %></td>
+            <td><%= game_link.link %></td>
+            <td><%= link_to "編集", edit_admin_game_link_path(game_link.id) %></td>
+            <td><%= link_to "削除", admin_game_link_path(game_link.id), method: :delete %></td>
+          </tr>
+        <% end %>
+
+      </table>
+
+    </div>
+
   </div>
 
-  <div>
-
-    <table class="table col-4 text-light">
-
-      <tr>
-        <th>title</th>
-        <th>url</th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <% @game_links.each do |game_link| %>
+  <div class="col-7">
+    <table class="table text-light">
+      <% @posts.each do |one_post| %>
         <tr>
-          <td><%= game_link.link_title %></td>
-          <td><%= game_link.link %></td>
-          <td><%= link_to "編集", edit_admin_game_link_path(game_link.id) %></td>
-          <td><%= link_to "削除", admin_game_link_path(game_link.id), method: :delete %></td>
+          <td><%= one_post.id %></td>
+          <td>
+              <%= one_post.title %>
+          </td>
+          <td>
+            <%= link_to admin_user_path(one_post.user.id) do %>
+              <%= one_post.user.nickname %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
-
     </table>
-
   </div>
-
 </div>

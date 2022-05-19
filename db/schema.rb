@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_162908) do
+ActiveRecord::Schema.define(version: 2022_05_19_163150) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 2022_05_19_162908) do
   create_table "comment_favs", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "comment_id"
+    t.integer "user_id"
+    t.index ["comment_id"], name: "index_comment_favs_on_comment_id"
+    t.index ["user_id"], name: "index_comment_favs_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -145,6 +149,8 @@ ActiveRecord::Schema.define(version: 2022_05_19_162908) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comment_favs", "comments"
+  add_foreign_key "comment_favs", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "follow_games", "games"

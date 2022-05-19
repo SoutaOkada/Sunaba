@@ -1,2 +1,24 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="row">
+  <div class="col-6">
+
+    <div>
+      <%= link_to admin_user_path(@post.user.id) do %>
+        <%= image_tag @post.user.image, size: '40x40' %>
+        <%= @post.user.nickname %>
+      <% end %>
+    </div>
+
+    <div>
+      <h3><%= @post.title %></h3>
+    </div>
+
+    <div>
+      <p><%= @post.post_text %></p>
+    </div>
+
+  </div>
+
+  <div class="col-6">
+
+  </div>
+</div>

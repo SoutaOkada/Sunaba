@@ -43,13 +43,19 @@
           <p>削除されたコメントです</p>
         <% else %>
           <div>
-            <%= image_tag comment.user.image, size: '50x50' %>
+            <%= link_to user_path(comment.user.id) do %>
+              <%= image_tag comment.user.image, size: '50x50' %><br />
+              <%= comment.user.nickname %>
+            <% end %>
           </div>
           <div>
             <p><%= comment.text %></p>
           </div>
           <% if comment.user == current_user %>
-            <%= link_to "削除", comment_path(comment.id), method: :patch %>
+            <%= form_with model: @comment, url: comment_path(comment.id), method: :patch do |f| %>
+              <%= f.hidden_field :is_active, :value => false %>
+              <%= f.submit "削除" %>
+            <% end %>
           <% end %>
         <% end %>
       </div>

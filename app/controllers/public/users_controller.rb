@@ -7,6 +7,7 @@ class Public::UsersController < ApplicationController
     if @user.is_active == false
       redirect_to users_withdrawn_path
     end
+    @follows = Relationship.where(user_id: @user.id)
   end
 
   def edit

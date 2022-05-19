@@ -1,141 +1,140 @@
 <div class="row">
+  <% if current_user.id == @user.id %>
+    <h1>マイページ</h1>
+  <% else %>
+    <h1><%= @user.nickname %>さんのプロフィール</h1>
+  <% end %>
+
+  <div>
+    <%= image_tag @user.image, size: '80x80' %>
+  </div>
+  <%= render 'public/relationships/follow_button', user: @user %>
+</div>
+
+<div class="row">
   <div class="col-6">
-
-    <div>
-      <% if current_user.id == @user.id %>
-        <h1>マイページ</h1>
-      <% else %>
-        <h1><%= @user.nickname %>さんのプロフィール</h1>
-      <% end %>
-    </div>
-
-    <div>
-      <%= image_tag @user.image, size: '80x80' %>
-      <%= render 'public/relationships/follow_button', user: @user %>
-    </div>
-
-    <div>
-        <% if current_user.id == @user.id %>
-          <div>
-            <div>
-              <h3>登録情報</h3>
-            </div>
-
-            <div>
-
-              <table class="table col-5 text-light">
-
-                <tr>
-                  <th>氏名</th>
-                  <td><%= @user.name %></td>
-                </tr>
-
-                <tr>
-                  <th>メールアドレス</th>
-                  <td><%= @user.email %></td>
-                </tr>
-
-                <tr>
-                  <th>生年月日</th>
-                  <td><%= @user.birth_date %></td>
-                </tr>
-
-                <tr>
-                  <th>性別</th>
-                  <td><%= @user.gender_i18n %></td>
-                </tr>
-
-              </table>
-            </div>
-          </div>
-        <% end %>
-
-      <div>
-
-        <div>
-          <% if current_user.id == @user.id %>
-            <h3>公開プロフィール</h3>
-          <% end %>
-        </div>
-
-        <div>
-          <table class="table col-5 text-light">
-
-            <tr>
-              <th>ユーザー名</th>
-              <td><%= @user.nickname %></td>
-            </tr>
-
-            <% if current_user.id == @user.id %>
-              <tr>
-                <th>性別の公開</th>
-                <td>
-                  <% if @user.open_gender == false %>
-                    <%= "非公開" %>
-                  <% else %>
-                    <%= "公開" %>
-                  <% end %>
-                </td>
-              </tr>
-            <% else %>
-              <% if @user.open_gender == true %>
-                <th>性別</th>
-                <td><%= @user.gender_i18n %></td>
-              <% end %>
-            <% end %>
-
-            <tr>
-              <th>自己紹介</th>
-              <td><%= @user.self_intro %></td>
-            </tr>
-
-          </table>
-        </div>
-
-      </div>
-
-    </div>
-
     <% if current_user.id == @user.id %>
-      <div>
-        <%= link_to "編集", edit_user_path(@user.id) %>
+      <div class="row">
+        <div>
+          <h3>登録情報</h3>
+        </div>
+
+        <table class="table text-light">
+          <tr>
+            <th>氏名</th>
+            <td><%= @user.name %></td>
+          </tr>
+
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+
+          <tr>
+            <th>生年月日</th>
+            <td><%= @user.birth_date %></td>
+          </tr>
+
+          <tr>
+            <th>性別</th>
+            <td><%= @user.gender_i18n %></td>
+          </tr>
+        </table>
       </div>
     <% end %>
 
-  </div>
+    <div class="row">
+      <div>
+        <% if current_user.id == @user.id %>
+          <h3>公開プロフィール</h3>
+        <% end %>
+      </div>
 
-  <div class="col-6">
-    <div>
-      <h2>ポスト一覧</h2>
-    </div>
-
-    <div>
       <table class="table text-light">
+        <tr>
+          <th>ユーザー名</th>
+          <td><%= @user.nickname %></td>
+        </tr>
 
+        <% if current_user.id == @user.id %>
           <tr>
-            <th>ゲーム</th>
-            <th>タイトル</th>
-            <th>投稿日時</th>
-          </tr>
-
-        <% @posts.each do |one_post| %>
-          <tr>
+            <th>性別の公開</th>
             <td>
-              <%= one_post.game.game_title %>
-            </td>
-            <td>
-              <%= link_to post_path(one_post.id) do %>
-                <%= one_post.title %>
+              <% if @user.open_gender == false %>
+                <%= "非公開" %>
+              <% else %>
+                <%= "公開" %>
               <% end %>
             </td>
-            <td>
-              <%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
-            </td>
           </tr>
+        <% else %>
+          <% if @user.open_gender == true %>
+            <th>性別</th>
+            <td><%= @user.gender_i18n %></td>
+          <% end %>
         <% end %>
 
+        <tr>
+          <th>自己紹介</th>
+          <td><%= @user.self_intro %></td>
+        </tr>
       </table>
-    </div>
-  </div>
 
+      <div>
+        <p>フォロー中のユーザー</p>
+        <table class="table text-light">
+          <% @follows.each do |follow| %>
+            <tr>
+              <td>
+                <%= link_to user_path(follow.follow.id) do %>
+                  <%= image_tag follow.follow.image, size:'30x30' %>
+                  <%= follow.follow.nickname %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+      <% if current_user.id == @user.id %>
+        <div>
+          <%= link_to "編集", edit_user_path(@user.id) %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-6">
+      <div>
+        <h2>ポスト一覧</h2>
+      </div>
+
+      <div>
+        <table class="table text-light">
+
+            <tr>
+              <th>ゲーム</th>
+              <th>タイトル</th>
+              <th>投稿日時</th>
+            </tr>
+
+          <% @posts.each do |one_post| %>
+            <tr>
+              <td>
+                <%= one_post.game.game_title %>
+              </td>
+              <td>
+                <%= link_to post_path(one_post.id) do %>
+                  <%= one_post.title %>
+                <% end %>
+              </td>
+              <td>
+                <%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+              </td>
+            </tr>
+          <% end %>
+
+        </table>
+      </div>
+    </div>
 </div>

@@ -81,10 +81,13 @@
         <tr>
           <td><%= one_post.id %></td>
           <td>
+            <%= link_to admin_post_path(one_post.id) do %>
               <%= one_post.title %>
+            <% end %>
           </td>
           <td>
             <%= link_to admin_user_path(one_post.user.id) do %>
+              <%= image_tag one_post.user.image, size: '30x30' %>
               <%= one_post.user.nickname %>
             <% end %>
           </td>

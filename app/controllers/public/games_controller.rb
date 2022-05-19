@@ -6,6 +6,6 @@ class Public::GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @post = Post.new
-    @posts = Post.where(game_id: @game.id).order(created_at: :DESC)
+    @posts = Post.where(game_id: @game.id, is_active: true).order(created_at: :DESC)
   end
 end

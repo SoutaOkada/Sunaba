@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get 'users/withdrawn' => "users#withdrawn"
     resources :users, only: [:show, :edit, :update]
 
+    get 'posts/deleted' => "posts#deleted"
     resources :posts, only: [:create, :show, :update]
 
     resources :comments, only: [:create, :update]

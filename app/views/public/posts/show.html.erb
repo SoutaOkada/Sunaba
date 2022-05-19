@@ -20,6 +20,18 @@
       </p>
     </div>
 
+    <div class="row">
+      <%= form_with model: @comment, url: comments_path do |f| %>
+        <%= f.hidden_field :post_id, :value => @post.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+
+        <%= f.label :text, "コメント" %>
+        <%= f.text_area :text %>
+
+        <%= f.submit "投稿" %>
+      <% end %>
+    </div>
+
   </div>
 
   <div class="col-7">

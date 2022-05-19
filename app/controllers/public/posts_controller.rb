@@ -15,12 +15,15 @@ class Public::PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to game_path(@post.game_id)
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:game_id, :user_id, :title, :post_text)
+    params.require(:post).permit(:game_id, :user_id, :title, :post_text, :is_active)
   end
 
 end

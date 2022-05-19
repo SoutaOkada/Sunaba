@@ -91,6 +91,13 @@
               <%= one_post.user.nickname %>
             <% end %>
           </td>
+          <td>
+            <% if one_post.is_active == true %>
+              公開
+            <% else %>
+              削除
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>

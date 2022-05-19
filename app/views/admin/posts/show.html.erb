@@ -16,6 +16,18 @@
       <p><%= @post.post_text %></p>
     </div>
 
+    <div>
+      <%= form_with model: @post, url: admin_post_path, method: :patch do |f| %>
+
+        <%= f.radio_button :is_active, :true %>
+        <%= f.label :is_active, "公開" %>
+        <%= f.radio_button :is_active, :false %>
+        <%= f.label :is_active, "削除" %>
+
+        <%= f.submit "更新" %>
+      <% end %>
+    </div>
+
   </div>
 
   <div class="col-6">

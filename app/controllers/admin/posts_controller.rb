@@ -4,5 +4,14 @@ class Admin::PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to request.referer
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:is_active)
   end
 end

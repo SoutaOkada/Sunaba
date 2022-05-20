@@ -81,7 +81,7 @@
       </table>
 
       <div>
-        <p>フォロー中のユーザー</p>
+        <p>フォロー</p>
         <table class="table text-light">
           <% @follows.each do |follow| %>
             <tr>
@@ -95,6 +95,23 @@
           <% end %>
         </table>
       </div>
+
+      <div>
+        <p>フォロワー</p>
+        <table class="table text-light">
+          <% @followers.each do |follower| %>
+            <tr>
+              <td>
+                <%= link_to user_path(follower.user.id) do %>
+                  <%= image_tag follower.user.image, size:'30x30' %>
+                  <%= follower.user.nickname %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
     </div>
 
       <% if current_user.id == @user.id %>

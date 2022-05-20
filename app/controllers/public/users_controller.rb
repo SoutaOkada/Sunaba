@@ -8,6 +8,7 @@ class Public::UsersController < ApplicationController
       redirect_to users_withdrawn_path
     end
     @follows = Relationship.where(user_id: @user.id)
+    @followers = Relationship.where(follow_id: @user.id)
   end
 
   def edit

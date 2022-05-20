@@ -6,6 +6,8 @@ class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = Post.where(user_id: (params[:id]))
+    @follows = Relationship.where(user_id: @user.id)
+    @followers = Relationship.where(follow_id: @user.id)
   end
 
   def update

@@ -89,6 +89,41 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-5">
+        <p>フォロー</p>
+        <table class="table text-light">
+          <% @follows.each do |follow| %>
+            <tr>
+              <td>
+                <%= link_to admin_user_path(follow.follow.id) do %>
+                  <%= image_tag follow.follow.image, size:'30x30' %>
+                  <%= follow.follow.nickname %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <div class="col-5">
+        <p>フォロワー</p>
+        <table class="table text-light">
+          <% @followers.each do |follower| %>
+            <tr>
+              <td>
+                <%= link_to admin_user_path(follower.user.id) do %>
+                  <%= image_tag follower.user.image, size:'30x30' %>
+                  <%= follower.user.nickname %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+
   </div>
 
   <div class="col-7">

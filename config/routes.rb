@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
     resources :relationships, only: [:create, :destroy]
 
+    resources :follow_games, only: [:create, :destroy]
+
   end
 
   namespace :admin do

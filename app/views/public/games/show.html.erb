@@ -88,22 +88,24 @@
           </tr>
 
         <% @posts.each do |one_post| %>
-          <tr>
-            <td>
-              <%= link_to post_path(one_post.id) do %>
-                <%= one_post.title %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to user_path(one_post.user.id) do %>
-                <%= image_tag one_post.user.image, size:'30x30' %>
-                <%= one_post.user.nickname %>
-              <% end %>
-            </td>
-            <td>
-              <%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
-            </td>
-          </tr>
+          <% if one_post.user.is_active == true %>
+            <tr>
+              <td>
+                <%= link_to post_path(one_post.id) do %>
+                  <%= one_post.title %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to user_path(one_post.user.id) do %>
+                  <%= image_tag one_post.user.image, size:'30x30' %>
+                  <%= one_post.user.nickname %>
+                <% end %>
+              </td>
+              <td>
+                <%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
 
       </table>

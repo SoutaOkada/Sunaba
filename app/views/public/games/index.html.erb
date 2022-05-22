@@ -14,25 +14,27 @@
             <% end %>
           </td>
           <td>
-            <% if game.users.include?(current_user) %>
-              <% @following_game_id = game.id %>
-              <%= form_with model: @follow_game, url: follow_game_path(game.id), method: :delete do |f| %>
-                <%= f.submit "フォロー解除" %>
-              <% end %>
-            <% else %>
-              <%= form_with model: @follow_game, url: follow_games_path do |f| %>
-                <%= f.hidden_field :game_id, :value => game.id %>
-                <%= f.hidden_field :user_id, :value => current_user.id %>
+            <% if user_signed_in? %>
+              <% if game.users.include?(current_user) %>
+                <% @following_game_id = game.id %>
+                <%= form_with model: @follow_game, url: follow_game_path(game.id), method: :delete do |f| %>
+                  <%= f.submit "フォロー解除" %>
+                <% end %>
+              <% else %>
+                <%= form_with model: @follow_game, url: follow_games_path do |f| %>
+                  <%= f.hidden_field :game_id, :value => game.id %>
+                  <%= f.hidden_field :user_id, :value => current_user.id %>
 
-                <%= f.submit "フォロー" %>
+                  <%= f.submit "フォロー" %>
+                <% end %>
               <% end %>
+            </td>
+            <td>
+              <% if game.users.include?(current_user) %>
+                フォロー中
+              <% end %>
+            </td>
             <% end %>
-          </td>
-          <td>
-            <% if game.users.include?(current_user) %>
-              フォロー中
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </table>

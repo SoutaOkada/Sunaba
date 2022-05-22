@@ -9,6 +9,7 @@ class Public::UsersController < ApplicationController
     end
     @follows = Relationship.where(user_id: @user.id)
     @followers = Relationship.where(follow_id: @user.id)
+    @following_games = FollowGame.where(user_id: @user.id)
   end
 
   def edit

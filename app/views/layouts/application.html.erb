@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>Sunaba</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,23 +10,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="background-color: #203744; color: #eedcb3">
+  <body class="h-100", style="background-color: #203744; color: #eedcb3">
+    <div class="container-fluid h-100">
+      <div class="row h-100">
 
-    <div class="container-fluid">
-
-      <div class="row">
-
-        <div class="col-2", style="position: fixed; background-color: #202f55; height: 100%">
+        <div class="col-2 shadow-lg", style="position: fixed; background-color: #202f55; height: 100%">
           <%= render 'layouts/sidebar' %>
         </div>
-
-        <div class="col-10 offset-2">
+        <div class="col-10 h-100 offset-2">
           <%= yield %>
         </div>
 
       </div>
-
     </div>
-
   </body>
 </html>

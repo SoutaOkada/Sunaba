@@ -1,97 +1,35 @@
-<div class="row">
-
-  <div class="col-4">
-    <div class="row">
-      <h2>Sunaba</h2>
-    </div>
-
-    <div class="row">
-      <p>
-        Sunabaは、サンドボックスゲーマーのためのコミュニティサイトです。</br>
-      </p>
-    </div>
-
-    <div class="row">
-      <h3>新着ゲーム</h3>
-      <table class="table text-light">
-        <% @games.each do |game| %>
-          <tr>
-            <td>
-              <%= link_to game_path(game.id) do %>
-                <%= game.game_title %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
-
-  <div class="col-4">
-      <div>
-          <h3>新着ポスト</h3>
-          <table class="table text-light">
-            <% @posts.each do |one_post| %>
-              <% if one_post.user.is_active == true %>
-                <tr>
-                  <td>
-                    <%= link_to user_path(one_post.user.id) do %>
-                      <%= image_tag one_post.user.image, size:'30x30' %>
-                      <%= one_post.user.nickname %>
-                    <% end %>
-                    </td>
-                    <td>
-                      <%= link_to game_path(one_post.game.id) do %>
-                        <%= one_post.game.game_title %>
-                      <% end %>
-                    </td>
-                    <td>
-                      <%= link_to post_path(one_post.id) do %>
-                        <%= one_post.title %>
-                      <% end %>
-                    </td>
-                </tr>
-              <% end %>
-            <% end %>
-          </table>
-        </div>
-      </div>
-
-  <% if user_signed_in? %>
+<div class="container-fluid h-100">
+  <div class="row h-100">
 
     <div class="col-4">
-      <div>
-        <h3>フォロー中ゲームの新着ポスト</h3>
-        <table class="table text-light">
-          <% @game_posts.each do |one_post| %>
-            <% if one_post.user.is_active == true %>
-              <tr>
-                <td>
-                  <%= link_to user_path(one_post.user.id) do %>
-                    <%= image_tag one_post.user.image, size:'30x30' %>
-                    <%= one_post.user.nickname %>
-                  <% end %>
-                  </td>
-                  <td>
-                    <%= link_to game_path(one_post.game.id) do %>
-                      <%= one_post.game.game_title %>
-                    <% end %>
-                  </td>
-                  <td>
-                    <%= link_to post_path(one_post.id) do %>
-                      <%= one_post.title %>
-                    <% end %>
-                  </td>
-              </tr>
-            <% end %>
-          <% end %>
-        </table>
-      </div>
 
-      <div>
-        <h3>フォロー中ユーザーの新着ポスト</h3>
-        <table class="table text-light">
-          <% @user_posts.each do |one_post| %>
+      <div class="row h-100">
+        <div class="col-12">
+          <div class="row h-10">
+            <h3>新着ゲーム</h3>
+          </div>
+          <div class="row h-90">
+            <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+              <% @games.each do |game| %>
+                <tr>
+                  <td>
+                    <%= link_to game_path(game.id) do %>
+                      <%= game.game_title %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4 h-100">
+      <h3>新着ポスト</h3>
+      <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+        <% @posts.each do |one_post| %>
+          <% if one_post.user.is_active == true %>
             <tr>
               <td>
                 <%= link_to user_path(one_post.user.id) do %>
@@ -111,22 +49,90 @@
                 </td>
             </tr>
           <% end %>
-        </table>
-      </div>
+        <% end %>
+      </table>
     </div>
 
-  <% else %>
+    <% if user_signed_in? %>
 
-    <div class="col-4">
-      <div>
-        <p>アカウントを作成してお気に入りのゲームやユーザーを登録しましょう。</p>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </div>
-      <div>
-        <p>登録済みの方はこちら</p>
-        <%= link_to "ログイン", new_user_session_path %>
-      </div>
-    </div>
+      <div class="col-4">
+        <div class="row h-50">
+          <div class="col-12">
+            <div class="row h-20">
+              <h3>フォロー中ゲームの新着ポスト</h3>
+              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+                <% @game_posts.each do |one_post| %>
+                  <% if one_post.user.is_active == true %>
+                    <tr>
+                      <td>
+                        <%= link_to user_path(one_post.user.id) do %>
+                          <%= image_tag one_post.user.image, size:'30x30' %>
+                          <%= one_post.user.nickname %>
+                        <% end %>
+                        </td>
+                        <td>
+                          <%= link_to game_path(one_post.game.id) do %>
+                            <%= one_post.game.game_title %>
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= link_to post_path(one_post.id) do %>
+                            <%= one_post.title %>
+                          <% end %>
+                        </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </table>
+            </div>
+          </div>
+        </div>
 
-  <% end %>
+        <div class="row h-50">
+          <div class="col-12">
+            <div class="row h-20">
+              <h3>フォロー中ユーザーの新着ポスト</h3>
+              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+                <% @user_posts.each do |one_post| %>
+                  <% if one_post.user.is_active == true %>
+                    <tr>
+                      <td>
+                        <%= link_to user_path(one_post.user.id) do %>
+                          <%= image_tag one_post.user.image, size: '30x30' %>
+                          <%= one_post.user.nickname %>
+                        <% end %>
+                        </td>
+                        <td>
+                          <%= link_to game_path(one_post.game.id) do %>
+                            <%= one_post.game.game_title %>
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= link_to post_path(one_post.id) do %>
+                            <%= one_post.title %>
+                          <% end %>
+                        </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </table>
+          </div>
+        </div>
+      </div>
+
+    <% else %>
+
+      <div class="col-4">
+        <div>
+          <p>アカウントを作成してお気に入りのゲームやユーザーを登録しましょう。</p>
+          <%= link_to "新規登録", new_user_registration_path %>
+        </div>
+        <div>
+          <p>登録済みの方はこちら</p>
+          <%= link_to "ログイン", new_user_session_path %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
 </div>

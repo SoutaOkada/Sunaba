@@ -1,89 +1,97 @@
-<div class="container">
+<div class="container-lg">
 
-  <div class="row">
-    <h2>新規登録</h2>
+  <div class="row border-bottom mb-3">
+    <h2 class="col-3 d-inline ml-2">新規登録</h2>
+    <div class="col-8 text-right">
+      <p class="d-inline">
+        <%= render "public/shared/links"%>
+      </p>
+    </div>
   </div>
 
-  <div class="row">
+  <%= form_with model: @user, url: registration_path(resource_name) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
 
-    <%= form_with model: @user, url: registration_path(resource_name) do |f| %>
-      <%= render "public/shared/error_messages", resource: resource %>
+    <div class="row">
 
-      <div class="field">
-        <%= f.label :email, "メールアドレス" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="col-6">
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :email, "メールアドレス" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'col-7' %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :password, "パスワード" %>
+          <% if @minimum_password_length %>
+          <em>最小<%= @minimum_password_length %>文字</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :password_confirmation, "パスワード再入力" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :name, "氏名"%><br />
+          <%= f.text_field :name, autocomplete: "off" %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :birth_date, "生年月日" %><br />
+          <%= f.date_select :birth_date, use_month_numbers: true, start_year: 1900 \
+            , end_year: (Time.now.year - 1), default: Date.new(2000, 1, 1) %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :gender, "性別" %><br />
+
+          <%= f.radio_button :gender, :male, class: 'radio' %>
+            <%= f.label :gender, "男性" %>
+          <%= f.radio_button :gender, :female, class: 'radio' %>
+            <%= f.label :gender, "女性" %>
+          <%= f.radio_button :gender, :other, class: 'radio' %>
+            <%= f.label :gender, "その他" %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :open_gender, "性別の公開" %><br />
+
+          <%= f.radio_button :open_gender, :false, checked: true %>
+            <%= f.label :open_gender, "非公開" %>
+          <%= f.radio_button :open_gender, :true %>
+            <%= f.label :open_gender, "公開" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= f.label :password, "パスワード" %>
-        <% if @minimum_password_length %>
-        <em>最小<%= @minimum_password_length %>文字</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password" %>
+      <div class="col-6">
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :nickname, "ニックネーム" %><br />
+          <%= f.text_field :nickname, autocomplete: "off" %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :self_intro, "自己紹介" %><br />
+          <%= f.text_area :self_intro, class: 'col-12', rows: '5' %>
+        </div>
+
+        <div class="field", style="margin-bottom:15px">
+          <%= f.label :image, "アイコン画像" %><br />
+          <%= f.file_field :image, accept: "image/*" %>
+        </div>
+
       </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation, "パスワード再入力" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="row">
+      <div class="actions col-12">
+        <%= f.submit "登録", class: 'btn btn-dark border mx-auto d-block col-3' %>
       </div>
+    </div>
 
-      <div class="field">
-        <%= f.label :name, "氏名"%><br />
-        <%= f.text_field :name, autocomplete: "off" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :birth_date, "生年月日" %><br />
-        <%= f.date_select :birth_date, use_month_numbers: true, start_year: 1900 \
-          , end_year: (Time.now.year - 1), default: Date.new(2000, 1, 1) %>
-      </div>
-
-      <div class="field">
-        <%= f.label :gender, "性別" %><br />
-
-        <%= f.radio_button :gender, :male %>
-          <%= f.label :gender, "男性" %>
-        <%= f.radio_button :gender, :female %>
-          <%= f.label :gender, "女性" %>
-        <%= f.radio_button :gender, :other %>
-          <%= f.label :gender, "その他" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :open_gender, "性別の公開" %><br />
-
-        <%= f.radio_button :open_gender, :false, checked: true %>
-          <%= f.label :open_gender, "非公開" %>
-        <%= f.radio_button :open_gender, :true %>
-          <%= f.label :open_gender, "公開" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :nickname, "ニックネーム" %><br />
-        <%= f.text_field :nickname, autocomplete: "off" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :self_intro, "自己紹介" %><br />
-        <%= f.text_area :self_intro %>
-      </div>
-
-      <div class="field">
-        <%= f.label :image, "アイコン画像" %><br />
-        <%= f.file_field :image, accept: "image/*" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "登録" %>
-      </div>
-
-    <% end %>
-
-  </div>
-
-  <div class="row">
-    <%= render "public/shared/links" %>
-  </div>
+  <% end %>
 
 </div>
 

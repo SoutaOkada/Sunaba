@@ -1,0 +1,32 @@
+<h2>検索結果</h2>
+
+<% if @range == "User" %>
+  <table class="table table-hover table-inverse text-light">
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.image, size: '30x30' %>
+              <%= user.nickname %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <table class="table table-hover table-inverse text-light">
+    <tbody>
+      <% @games.each do |game| %>
+        <tr>
+          <td>
+            <%= link_to game_path(game.id) do %>
+              <%= game.game_title %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

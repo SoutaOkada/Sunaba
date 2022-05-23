@@ -22,7 +22,6 @@ Rails.application.routes.draw do
     get 'users/withdrawn' => "users#withdrawn"
     resources :users, only: [:show, :edit, :update]
 
-
     get 'posts/deleted' => "posts#deleted"
     resources :posts, only: [:create, :show, :update]
 
@@ -31,6 +30,8 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy]
 
     resources :follow_games, only: [:create, :destroy]
+
+    get 'search' => "searches#search"
 
   end
 

@@ -9,15 +9,15 @@
     </div>
 
     <div class="row">
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">
-      <%= link_to "ゲーム一覧", admin_games_path, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ゲーム一覧", admin_games_path, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">
-      <%= link_to "ユーザー一覧", admin_users_path, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ユーザー一覧", admin_users_path, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">
@@ -43,17 +43,19 @@
 
     <div class="row">
       <%= link_to user_path(current_user.id), style: 'text-align: center; margin: 0 auto' do %>
-        <div><%= image_tag current_user.image, size: '80x80', class: 'img-rounded' %></div>
-        <div><%= current_user.nickname %></div>
+        <div class="mb-3">
+          <div><%= image_tag current_user.image, size: '80x80', class: 'img-thumbnail' %></div>
+          <div><%= current_user.nickname %></div>
+        </div>
       <% end %>
     </div>
 
     <div class="row">
-      <%= link_to "ゲーム一覧", games_path, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ゲーム一覧", games_path, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">
@@ -78,16 +80,16 @@
     </div>
 
     <div class="row">
-      <%= link_to "ゲーム一覧", games_path, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ゲーム一覧", games_path, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
 
     <div class="row">
-      <%= link_to "新規登録", new_user_registration_path, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "新規登録", new_user_registration_path, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">
-      <%= link_to "ログイン", new_user_session_path, class: 'text-white btn btn-dark', style: 'margin:5px 0; width: 100%' %>
+      <%= link_to "ログイン", new_user_session_path, class: 'text-white btn btn-dark w-100 border border-secondary rounded-0' %>
     </div>
 
     <div class="row">

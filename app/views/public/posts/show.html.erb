@@ -1,77 +1,120 @@
-<div class="row">
+<div class="container-fluid">
+  <div class="row">
 
+    <div class="col-6">
 
-  <div class="col-5">
-
-    <div class="row">
-      <div>
-        <%= link_to user_path(@post.user.id) do %>
-          <%= image_tag @post.user.image, size:'30x30' %>
-          <%= @post.user.nickname %>
-        <% end %>
-      </div>
-
-      <h2><%= @post.title %></h2>
-    </div>
-
-    <div class="row">
-      <p>
-        <%= @post.post_text %>
-      </p>
-    </div>
-
-    <% if user_signed_in? %>
-      <% if @post.user_id == current_user.id %>
-        <div class="row">
-          <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
-            <%= f.hidden_field :is_active, :value => false %>
-            <%= f.submit "投稿を削除" %>
-          <% end %>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-5">
+              <%= link_to user_path(@post.user.id) do %>
+                <%= image_tag @post.user.image, size:'30x30', class: 'img-thumbnail' %>
+                <%= @post.user.nickname %>
+              <% end %>
+            </div>
+            <div class="col-5">
+              <%= link_to game_path(@post.game.id) do %>
+                <h5><%= @post.game.game_title %></h5>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <h2><%= @post.title %></h2>
+            </div>
+            <div class="col-2">
+              <% if @post.user_id == current_user.id %>
+                <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+                  <%= f.hidden_field :is_active, :value => false %>
+                  <%= f.submit "投稿を削除", class: 'btn btn-danger' %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         </div>
-      <% end %>
-
-      <div class="row">
-        <%= form_with model: @comment, url: comments_path do |f| %>
-          <%= f.hidden_field :post_id, :value => @post.id %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-
-          <%= f.label :text, "コメント" %>
-          <%= f.text_area :text %>
-
-          <%= f.submit "投稿" %>
-        <% end %>
       </div>
-    <% end %>
 
-  </div>
-
-  <div class="col-7">
-    <% @comments.each do |comment| %>
       <div class="row">
-        <% if comment.user.is_active == false %>
-          <p>退会済みユーザーのコメントです</p>
-        <% elsif comment.is_active == false %>
-          <p>削除されたコメントです</p>
-        <% else %>
-          <div>
-            <%= link_to user_path(comment.user.id) do %>
-              <%= image_tag comment.user.image, size: '50x50' %><br />
-              <%= comment.user.nickname %>
-            <% end %>
+        <div class="w-100 p-1 border border-dark bg-secondary text-light">
+          <p>
+            <%= @post.post_text %>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12">
+              <%= form_with model: @comment, url: comments_path do |f| %>
+                <%= f.hidden_field :post_id, :value => @post.id %>
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+
+                <%= f.label :text, "コメント" %><br />
+                <%= f.text_area :text, rows: '5', class: 'w-100' %>
+                <div class="row justify-content-end">
+                  <%= f.submit "投稿", class: 'btn btn-info text-dark col-2 mr-3' %>
+                </div>
+              <% end %>
+            </div>
           </div>
-          <div>
-            <p><%= comment.text %></p>
-          </div>
-          <% if comment.user == current_user %>
-            <%= form_with model: @comment, url: comment_path(comment.id), method: :patch do |f| %>
-              <%= f.hidden_field :is_active, :value => false %>
-              <%= f.submit "削除" %>
-            <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-6">
+      <div class="row">
+        <table class="table text-light table-dark table-striped border border-secondary m-2">
+          <% @comments.each do |comment| %>
+            <tr>
+              <td>
+                <div class="col-2">
+                  <div class="row">
+                      <div class="justify-content-center">
+                        <% if comment.is_active == true %>
+                          <%= link_to user_path(comment.user.id) do %>
+                            <%= image_tag comment.user.image, size: '30x30', class: 'img-thumbnail' %><br />
+                            <%= comment.user.nickname %>
+                          <% end %>
+                        <% end %>
+                      </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="col-8">
+                  <div class="row">
+                    <div>
+                      <% if comment.user.is_active == false %>
+                        <p>退会済みユーザーのコメントです</p>
+                      <% elsif comment.is_active == false %>
+                        <p>削除されたコメントです</p>
+                      <% else %>
+                        <p><%= comment.text %></p>
+                        <p><%= comment.created_at.strftime("%m月%d日 %H:%M") %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="col-2">
+                  <% if comment.user == current_user %>
+                    <% if comment.is_active == true %>
+                      <%= form_with model: @comment, url: comment_path(comment.id), method: :patch do |f| %>
+                        <%= f.hidden_field :is_active, :value => false %>
+                        <%= f.submit "削除", class: 'btn btn-danger' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
           <% end %>
-        <% end %>
+        </table>
       </div>
-    <% end %>
+    </div>
 
   </div>
-
 </div>

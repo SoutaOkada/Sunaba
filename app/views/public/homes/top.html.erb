@@ -8,8 +8,8 @@
           <div class="row h-10">
             <h3>新着ゲーム</h3>
           </div>
-          <div class="row h-90">
-            <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+          <div class="row h-90", style="overflow-y: scroll">
+            <table class="table text-light table-dark table-striped table-sm border border-secondary", style="overflow-y: scroll">
               <% @games.each do |game| %>
                 <tr>
                   <td>
@@ -26,98 +26,120 @@
     </div>
 
     <div class="col-4 h-100">
-      <h3>新着ポスト</h3>
-      <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
-        <% @posts.each do |one_post| %>
-          <% if one_post.user.is_active == true %>
-            <tr>
-              <td>
-                <%= link_to user_path(one_post.user.id) do %>
-                  <%= image_tag one_post.user.image, size:'30x30' %>
-                  <%= one_post.user.nickname %>
-                <% end %>
-                </td>
-                <td>
-                  <%= link_to game_path(one_post.game.id) do %>
-                    <%= one_post.game.game_title %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to post_path(one_post.id) do %>
-                    <%= one_post.title %>
-                  <% end %>
-                </td>
-            </tr>
-          <% end %>
-        <% end %>
-      </table>
+      <div class="col-12">
+        <div class="row">
+          <h3>新着ポスト</h3>
+        </div>
+        <div class="row" class="row h-90", style="overflow-y: scroll">
+          <table class="table text-light table-dark table-striped table-sm border border-secondary", style="overflow-y: scroll">
+            <% @posts.each do |one_post| %>
+              <% if one_post.user.is_active == true %>
+                <tr>
+                  <td>
+                    <%= link_to user_path(one_post.user.id) do %>
+                      <%= image_tag one_post.user.image, size:'30x30', class: 'img-thumbnail' %>
+                      <%= one_post.user.nickname %>
+                    <% end %>
+                    </td>
+                    <td>
+                      <%= link_to game_path(one_post.game.id) do %>
+                        <%= one_post.game.game_title %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to post_path(one_post.id) do %>
+                        <p style="margin:0;"><%= one_post.title %></p>
+                        <p style="margin:0;"><%= one_post.game.created_at.strftime("%m月%d日 %H:%M") %></p>
+                      <% end %>
+                    </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
     </div>
 
     <% if user_signed_in? %>
 
       <div class="col-4">
-        <div class="row h-50">
+
+        <div class="row h-100">
           <div class="col-12">
-            <div class="row h-20">
-              <h3>フォロー中ゲームの新着ポスト</h3>
-              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
-                <% @game_posts.each do |one_post| %>
-                  <% if one_post.user.is_active == true %>
-                    <tr>
-                      <td>
-                        <%= link_to user_path(one_post.user.id) do %>
-                          <%= image_tag one_post.user.image, size:'30x30' %>
-                          <%= one_post.user.nickname %>
-                        <% end %>
-                        </td>
-                        <td>
-                          <%= link_to game_path(one_post.game.id) do %>
-                            <%= one_post.game.game_title %>
-                          <% end %>
-                        </td>
-                        <td>
-                          <%= link_to post_path(one_post.id) do %>
-                            <%= one_post.title %>
-                          <% end %>
-                        </td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </table>
+
+            <div class="row h-auto">
+              <div class="col-12">
+                <div class="row h-10">
+                  <h5>フォロー中ゲームの新着ポスト</h5>
+                </div>
+                <div class="row h-90", style="overflow-y: scroll">
+                  <table class="table text-light table-dark table-striped table-sm border border-secondary", style="overflow: scroll">
+                    <% @game_posts.each do |one_post| %>
+                      <% if one_post.user.is_active == true %>
+                        <tr>
+                          <td>
+                            <%= link_to user_path(one_post.user.id) do %>
+                              <%= image_tag one_post.user.image, size:'30x30', class: 'img-thumbnail' %>
+                              <%= one_post.user.nickname %>
+                            <% end %>
+                          </td>
+                          <td>
+                            <%= link_to game_path(one_post.game.id) do %>
+                              <%= one_post.game.game_title %>
+                            <% end %>
+                          </td>
+                          <td>
+                            <%= link_to post_path(one_post.id) do %>
+                              <p style="margin:0;"><%= one_post.title %></p>
+                              <p style="margin:0;"><%= one_post.game.created_at.strftime("%m月%d日 %H:%M") %></p>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  </table>
+                </div>
+              </div>
             </div>
+
+            <div class="row h-auto">
+              <div class="col-12">
+                <div class="row h-10">
+                  <h5>フォロー中ユーザーの新着ポスト</h5>
+                </div>
+                <div class="row h-90", style="overflow-y: scroll">
+                  <table class="table text-light table-dark table-striped table-sm border border-secondary", style="overflow-y: scroll">
+                    <% @user_posts.each do |one_post| %>
+                      <% if one_post.user.is_active == true %>
+                        <tr>
+                          <td>
+                            <%= link_to user_path(one_post.user.id) do %>
+                              <%= image_tag one_post.user.image, size: '30x30', class: 'img-thumbnail' %>
+                              <%= one_post.user.nickname %>
+                            <% end %>
+                            </td>
+                            <td>
+                              <%= link_to game_path(one_post.game.id) do %>
+                                <%= one_post.game.game_title %>
+                              <% end %>
+                            </td>
+                            <td>
+                              <%= link_to post_path(one_post.id) do %>
+                                <p style="margin:0;"><%= one_post.title %></p>
+                                <p style="margin:0;"><%= one_post.game.created_at.strftime("%m月%d日 %H:%M") %></p>
+                              <% end %>
+                            </td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="row h-50">
-          <div class="col-12">
-            <div class="row h-20">
-              <h3>フォロー中ユーザーの新着ポスト</h3>
-              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
-                <% @user_posts.each do |one_post| %>
-                  <% if one_post.user.is_active == true %>
-                    <tr>
-                      <td>
-                        <%= link_to user_path(one_post.user.id) do %>
-                          <%= image_tag one_post.user.image, size: '30x30' %>
-                          <%= one_post.user.nickname %>
-                        <% end %>
-                        </td>
-                        <td>
-                          <%= link_to game_path(one_post.game.id) do %>
-                            <%= one_post.game.game_title %>
-                          <% end %>
-                        </td>
-                        <td>
-                          <%= link_to post_path(one_post.id) do %>
-                            <%= one_post.title %>
-                          <% end %>
-                        </td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </table>
-          </div>
-        </div>
       </div>
 
     <% else %>

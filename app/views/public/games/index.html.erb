@@ -21,14 +21,14 @@
                 <% if game.users.include?(current_user) %>
                   <% @following_game_id = game.id %>
                   <%= form_with model: @follow_game, url: follow_game_path(game.id), method: :delete do |f| %>
-                    <%= f.submit "フォロー解除" %>
+                    <%= f.submit "フォロー解除", class: 'btn btn-secondary' %>
                   <% end %>
                 <% else %>
                   <%= form_with model: @follow_game, url: follow_games_path do |f| %>
                     <%= f.hidden_field :game_id, :value => game.id %>
                     <%= f.hidden_field :user_id, :value => current_user.id %>
 
-                    <%= f.submit "フォロー" %>
+                    <%= f.submit "フォロー", class: 'btn btn-primary' %>
                   <% end %>
                 <% end %>
               </td>

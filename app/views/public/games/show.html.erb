@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row h-100">
-    <div class="col-12">
+    <div class="col-md-12">
 
       <div class="row h-20">
         <div class="col-2">
@@ -38,24 +38,26 @@
       </div>
 
       <div class="row h-100">
-        <div class="col-5">
+        <div class="col-md-5">
           <div class="row h-50">
             <div class="col-12">
               <h3>外部リンク</h3>
-              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+              <div style="overflow-y: scroll">
+                <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
 
-                  <% @game.game_links.each do |game_link| %>
-                    <tr>
-                      <td>
-                        <%= game_link.link_title %>
-                      </td>
+                    <% @game.game_links.each do |game_link| %>
+                      <tr>
+                        <td>
+                          <%= game_link.link_title %>
+                        </td>
 
-                      <td>
-                        <a href="<%= game_link.link %>">link</a>
-                      </td>
-                    </tr>
-                  <% end %>
-              </table>
+                        <td>
+                          <a href="<%= game_link.link %>">link</a>
+                        </td>
+                      </tr>
+                    <% end %>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -88,39 +90,41 @@
 
         </div>
 
-        <div class="col-7">
+        <div class="col-md-7">
           <div class="row h-100">
             <div class="col-12">
               <h3>新着ポスト</h3>
-              <table class="table text-light table-dark table-striped border border-secondary mt-1", style="overflow-y: scroll">
+              <div style="overflow-y: scroll">
+                <table class="table text-light table-dark table-striped border border-secondary mt-1">
 
-                  <tr>
-                    <th>タイトル</th>
-                    <th>投稿者</th>
-                    <th>投稿日時</th>
-                  </tr>
-
-                <% @posts.each do |one_post| %>
-                  <% if one_post.user.is_active == true %>
                     <tr>
-                      <td>
-                        <%= link_to post_path(one_post.id) do %>
-                          <%= one_post.title %>
-                        <% end %>
-                      </td>
-                      <td>
-                        <%= link_to user_path(one_post.user.id) do %>
-                          <%= image_tag one_post.user.image, size:'30x30' %>
-                          <%= one_post.user.nickname %>
-                        <% end %>
-                      </td>
-                      <td>
-                        <%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
-                      </td>
+                      <th>タイトル</th>
+                      <th>投稿者</th>
+                      <th>投稿日時</th>
                     </tr>
+
+                  <% @posts.each do |one_post| %>
+                    <% if one_post.user.is_active == true %>
+                      <tr>
+                        <td>
+                          <%= link_to post_path(one_post.id) do %>
+                            <%= one_post.title %>
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= link_to user_path(one_post.user.id) do %>
+                            <%= image_tag one_post.user.image, size:'30x30' %>
+                            <%= one_post.user.nickname %>
+                          <% end %>
+                        </td>
+                        <td>
+                          <%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+                        </td>
+                      </tr>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </table>
+                </table>
+              </div>
             </div>
           </div>
         </div>

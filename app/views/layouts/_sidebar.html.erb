@@ -4,7 +4,7 @@
 
     <div class="row text-center">
       <div class="col-12 link-light">
-        <%= image_tag 'logo.png', size: '150x70' %>
+        <%= image_tag 'logo.png', size: '150x70', class: 'img-fluid' %>
       </div>
     </div>
 
@@ -36,7 +36,7 @@
     <div class="row text-center">
       <div class="col-12 link-light w-auto my-3">
         <%= link_to root_path do %>
-          <%= image_tag 'logo.png', size: '150x70' %>
+          <%= image_tag 'logo.png', size: '150x70', class: 'img-fluid'  %>
         <% end %>
       </div>
     </div>
@@ -61,7 +61,7 @@
     <div class="row">
       <div class="col-12", style='margin:10px 0; width: 100%'>
         <%= form_with url: search_path, local: true, method: :get do |f| %>
-          <%= f.text_field :word %>
+          <%= f.text_field :word, class: 'form-control col-md-12' %>
           <%= f.select :range, options_for_select([["ユーザー","User"],["ゲーム","Game"]]) %>
           <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backword_match"], ["部分一致","partial_match"]]) %>
           <%= f.submit "検索", class: "btn btn-primary" %>
@@ -74,7 +74,7 @@
     <div class="row text-center">
       <div class="col-12 link-light w-auto my-3">
         <%= link_to root_path do %>
-          <%= image_tag 'logo.png', size: '150x70' %>
+          <%= image_tag 'logo.png', size: '150x70', class: 'img-fluid'  %>
         <% end %>
       </div>
     </div>
@@ -97,7 +97,7 @@
         <%= form_with url: search_path, local: true, method: :get do |f| %>
           <%= f.label :word, "ゲーム検索" %></br>
           <%= f.hidden_field :range, :value => ["Game"] %>
-          <%= f.text_field :word %>
+          <%= f.text_field :word, class: 'form-control col-md-12' %>
           <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backword_match"], ["部分一致","partial_match"]]) %>
           <%= f.submit "検索", class: "btn btn-primary" %>
         <% end %>

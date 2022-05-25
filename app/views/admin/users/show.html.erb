@@ -1,154 +1,175 @@
-<div class="row">
-  <div>
-    <h1><%= @user.name %></h1>
-  </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
 
-  <div>
-    <%= image_tag @user.image, size: '100x100' %>
-  </div>
-</div>
+      <div class="row mb-3">
+        <div>
+          <h2><%= @user.name %></h2>
+        </div>
 
-<div class="row">
-  <div class="col-5">
+        <div>
+          <%= image_tag @user.image, size: '50x50', class: 'img-thumbnail' %>
+        </div>
+      </div>
 
-    <div>
+      <div class="row">
+        <div class="col-5">
+          <div>
+            <table class="table text-light table-dark table-striped table-sm border border-secondary">
 
-      <table class="table text-light">
+              <tr>
+                <td>id</td>
+                <td><%= @user.id %></td>
+              </tr>
 
-        <tr>
-          <td>メールアドレス</td>
-          <td><%= @user.email %></td>
-        </tr>
+              <tr>
+                <td>メールアドレス</td>
+                <td><%= @user.email %></td>
+              </tr>
 
-        <tr>
-          <td>生年月日</td>
-          <td><%= @user.birth_date %></td>
-        </tr>
+              <tr>
+                <td>生年月日</td>
+                <td><%= @user.birth_date %></td>
+              </tr>
 
-        <tr>
-          <td>性別</td>
-          <td><%= @user.gender_i18n %></td>
-        </tr>
+              <tr>
+                <td>性別</td>
+                <td><%= @user.gender_i18n %></td>
+              </tr>
 
-        <tr>
-          <td>性別の公開</td>
-          <td>
-            <% if @user.open_gender == false %>
-              <%= "非公開" %>
-            <% else %>
-              <%= "公開" %>
-            <% end %>
-          </td>
-        </tr>
+              <tr>
+                <td>性別の公開</td>
+                <td>
+                  <% if @user.open_gender == false %>
+                    <%= "非公開" %>
+                  <% else %>
+                    <%= "公開" %>
+                  <% end %>
+                </td>
+              </tr>
 
-        <tr>
-          <td>ニックネーム</td>
-          <td><%= @user.nickname %></td>
-        </tr>
+              <tr>
+                <td>ニックネーム</td>
+                <td><%= @user.nickname %></td>
+              </tr>
 
-        <tr>
-          <td>自己紹介</td>
-          <td><%= @user.self_intro %></td>
-        </tr>
+              <tr>
+                <td>自己紹介</td>
+                <td><%= @user.self_intro %></td>
+              </tr>
 
-        <tr>
-          <td>ステータス</td>
-          <td>
-            <% if @user.is_active == true %>
-            <%= "有効" %>
-            <% else %>
-            <%= "退会済み" %>
-            <% end %>
-          </td>
-        </tr>
+              <tr>
+                <td>ステータス</td>
+                <td>
+                  <% if @user.is_active == true %>
+                  <%= "有効" %>
+                  <% else %>
+                  <%= "退会済み" %>
+                  <% end %>
+                </td>
+              </tr>
 
-        <tr>
-          <td>登録日時</td>
-          <td><%= @user.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-        </tr>
+              <tr>
+                <td>登録日時</td>
+                <td><%= @user.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+              </tr>
 
-      </table>
+            </table>
 
+          </div>
+
+          <div>
+            <div>
+              <h3>ステータス更新</h3>
+            </div>
+
+            <div>
+              <%= form_with model: @user, url: admin_user_path(params[:id]), method: :patch do |f| %>
+                <%= f.radio_button :is_active, :true %>
+                <%= f.label :is_active, "有効" %>
+
+                <%= f.radio_button :is_active, :false %>
+                <%= f.label :is_active, "退会" %>
+
+                <%= f.submit "更新", class: 'btn btn-info ml-5' %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-5">
+              <p>フォロー</p>
+              <div style="overflow-y: scroll">
+                <table class="table text-light table-dark table-striped table-sm border border-secondary">
+                  <% @follows.each do |follow| %>
+                    <tr>
+                      <td>
+                        <%= link_to admin_user_path(follow.follow.id) do %>
+                          <%= image_tag follow.follow.image, size:'30x30' %>
+                          <%= follow.follow.nickname %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-5">
+              <p>フォロワー</p>
+              <div style="overflow-y: scroll">
+                <table class="table text-light table-dark table-striped table-sm border border-secondary">
+                  <% @followers.each do |follower| %>
+                    <tr>
+                      <td>
+                        <%= link_to admin_user_path(follower.user.id) do %>
+                          <%= image_tag follower.user.image, size:'30x30' %>
+                          <%= follower.user.nickname %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="col-7">
+          <p>ポスト</p>
+          <div style="overflow-y: scroll">
+            <table class="table text-light table-dark table-striped table-sm border border-secondary">
+              <% @posts.each do |one_post| %>
+                <tr>
+                  <td><%= one_post.id %></td>
+                  <td>
+                    <%= link_to admin_post_path(one_post.id) do %>
+                      <p style="margin:0;"><%= one_post.title %></p>
+                      <p style="margin:0;"><%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %></p>
+                    <% end %>
+                  </td>
+
+                  <td>
+                    <%= link_to admin_game_path(one_post.game.id) do %>
+                      <%= one_post.game.game_title %>
+                    <% end %>
+                  </td>
+
+                  <td>
+                    <% if one_post.is_active == true %>
+                      公開
+                    <% else %>
+                      削除
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+
+      </div>
     </div>
-
-    <div>
-      <div>
-        <h3>ステータス更新</h3>
-      </div>
-
-      <div>
-        <%= form_with model: @user, url: admin_user_path(params[:id]), method: :patch do |f| %>
-          <%= f.radio_button :is_active, :true %>
-          <%= f.label :is_active, "有効" %>
-
-          <%= f.radio_button :is_active, :false %>
-          <%= f.label :is_active, "退会" %>
-
-          <%= f.submit "更新" %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-5">
-        <p>フォロー</p>
-        <table class="table text-light">
-          <% @follows.each do |follow| %>
-            <tr>
-              <td>
-                <%= link_to admin_user_path(follow.follow.id) do %>
-                  <%= image_tag follow.follow.image, size:'30x30' %>
-                  <%= follow.follow.nickname %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-
-      <div class="col-5">
-        <p>フォロワー</p>
-        <table class="table text-light">
-          <% @followers.each do |follower| %>
-            <tr>
-              <td>
-                <%= link_to admin_user_path(follower.user.id) do %>
-                  <%= image_tag follower.user.image, size:'30x30' %>
-                  <%= follower.user.nickname %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
-
-
   </div>
-
-  <div class="col-7">
-
-    <table class="table text-light">
-      <% @posts.each do |one_post| %>
-        <tr>
-          <td><%= one_post.id %></td>
-          <td>
-            <%= link_to admin_post_path(one_post.id) do %>
-              <%= one_post.title %>
-            <% end %>
-          </td>
-
-          <td>
-            <% if one_post.is_active == true %>
-              公開
-            <% else %>
-              削除
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-
-  </div>
-
-</div>

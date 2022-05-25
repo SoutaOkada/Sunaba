@@ -1,6 +1,9 @@
 <div class="container-fluid">
 
-  <div class="row">
+  <div class="row mb-3">
+    <div class="col-1">
+      <%= image_tag @user.image, size: '80x80', class: 'img-thumbnail' %>
+    </div>
     <div class="col-7">
       <% if current_user.id == @user.id %>
         <h1>マイページ</h1>
@@ -8,16 +11,15 @@
         <h1><%= @user.nickname %>さんのプロフィール</h1>
       <% end %>
     </div>
-    <div class="col-2">
-      <%= image_tag @user.image, size: '80x80', class: 'img-thumbnail' %>
-    </div>
     <div class="col-3">
       <% if current_user.id == @user.id %>
           <div>
             <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-dark border mx-auto d-block col-3 mt-3' %>
           </div>
       <% else %>
-        <%= render 'public/relationships/follow_button', user: @user %>
+        <div class="mt-3">
+          <%= render 'public/relationships/follow_button', user: @user%>
+        </div>
       <% end %>
     </div>
   </div>
@@ -94,53 +96,59 @@
         <div class="row">
           <div class="col-4">
             <p>フォロー</p>
-            <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
-              <% @follows.each do |follow| %>
-                <% if follow.follow.is_active == true %>
-                  <tr>
-                    <td>
-                      <%= link_to user_path(follow.follow.id) do %>
-                        <%= image_tag follow.follow.image, size:'30x30' %>
-                        <%= follow.follow.nickname %>
-                      <% end %>
-                    </td>
-                  </tr>
+            <div style="overflow-y: scroll">
+              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+                <% @follows.each do |follow| %>
+                  <% if follow.follow.is_active == true %>
+                    <tr>
+                      <td>
+                        <%= link_to user_path(follow.follow.id) do %>
+                          <%= image_tag follow.follow.image, size:'30x30' %>
+                          <%= follow.follow.nickname %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </table>
+              </table>
+            </div>
           </div>
 
           <div class="col-4">
             <p>フォロワー</p>
-            <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
-              <% @followers.each do |follower| %>
-                <% if follower.user.is_active == true %>
-                  <tr>
-                    <td>
-                      <%= link_to user_path(follower.user.id) do %>
-                        <%= image_tag follower.user.image, size:'30x30' %>
-                        <%= follower.user.nickname %>
-                      <% end %>
-                    </td>
-                  </tr>
+            <div style="overflow-y: scroll">
+              <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+                <% @followers.each do |follower| %>
+                  <% if follower.user.is_active == true %>
+                    <tr>
+                      <td>
+                        <%= link_to user_path(follower.user.id) do %>
+                          <%= image_tag follower.user.image, size:'30x30' %>
+                          <%= follower.user.nickname %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </table>
+              </table>
+            </div>
           </div>
 
           <div class="col-4">
             <p>フォロー中のゲーム</p>
-            <table class=" table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
-              <% @following_games.each do |follow_game| %>
-                <tr>
-                  <td>
-                    <%= link_to game_path(follow_game.game.id) do %>
-                      <%= follow_game.game.game_title %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </table>
+            <div style="overflow-y: scroll">
+              <table class=" table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
+                <% @following_games.each do |follow_game| %>
+                  <tr>
+                    <td>
+                      <%= link_to game_path(follow_game.game.id) do %>
+                        <%= follow_game.game.game_title %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -152,7 +160,7 @@
           <h2>ポスト一覧</h2>
         </div>
 
-        <div>
+        <div style="overflow-y: scroll">
           <table class="table text-light table-dark table-striped border border-secondary", style="overflow-y: scroll">
 
               <tr>

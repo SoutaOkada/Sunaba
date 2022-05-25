@@ -1,55 +1,67 @@
-<div class="row">
-  <h1>ゲーム一覧</h1>
-</div>
+<div class="container-lg">
+  <div class="row">
+    <div class="col-12">
 
-<div class="row">
-  <div class="col-2">
-    <h2>新規登録</h2>
-  </div>
+      <div class="row">
+        <h3>ゲーム一覧</h3>
+      </div>
 
-  <div class="col-5">
-    <%= form_with model: @game, url: admin_games_path do |f| %>
-      <%= f.label :game_title, "タイトル" %><br />
-      <%= f.text_field :game_title %>
+      <div class="row mb-3">
+        <div class="col-5">
+          <div class="row">
+            <h4>新規登録</h4>
+          </div>
 
-      <%= f.submit "登録" %>
-    <% end %>
-  </div>
-</div>
+          <div class="row">
+            <%= form_with model: @game, url: admin_games_path do |f| %>
+              <%= f.label :game_title, "タイトル" %><br />
+              <%= f.text_field :game_title %>
 
-<div class="row">
-  <table class="table col-4 text-light">
-    <tr>
-      <th>id</th>
-      <th>タイトル</th>
-      <th>ステータス</th>
-    </tr>
-
-    <% @games.each do |game| %>
-        <tr>
-          <td>
-            <div>
-              <%= game.id %>
-            </div>
-          </td>
-
-          <td>
-            <%= link_to admin_game_path(game.id) do %>
-              <%= game.game_title %>
+              <%= f.submit "登録", class: 'btn btn-primary' %>
             <% end %>
-          </td>
+          </div>
+        </div>
+      </div>
 
-          <td>
-            <% if game.is_active == true %>
-              <%= "公開中" %>
-            <% else %>
-              <%= "削除" %>
-            <% end %>
-          </td>
-        </tr>
-    <% end %>
+      <div class="row">
+        <div class="col-4">
+          <div style="overflow-y: scroll">
+            <table class="table table-dark table-striped text-light table-sm border border-secondary">
+              <tr>
+                <th>id</th>
+                <th>タイトル</th>
+                <th>ステータス</th>
+              </tr>
 
-  </table>
+              <% @games.each do |game| %>
+                  <tr>
+                    <td>
+                      <div>
+                        <%= game.id %>
+                      </div>
+                    </td>
 
+                    <td>
+                      <%= link_to admin_game_path(game.id) do %>
+                        <%= game.game_title %>
+                      <% end %>
+                    </td>
 
+                    <td>
+                      <% if game.is_active == true %>
+                        <%= "公開中" %>
+                      <% else %>
+                        <%= "削除" %>
+                      <% end %>
+                    </td>
+                  </tr>
+              <% end %>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

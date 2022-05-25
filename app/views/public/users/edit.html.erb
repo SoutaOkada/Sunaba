@@ -1,0 +1,73 @@
+<div class="container-lg">
+
+  <div class="row">
+    <h1>登録情報編集</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="col-6">
+      <%= form_with model: @user do |f| %>
+        <div class="field mb-3">
+          <%= f.label :email, "メールアドレス" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'col-7' %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :name, "氏名"%><br />
+          <%= f.text_field :name, autocomplete: "off" %>
+        </div>
+
+        <div class="field mb-3">
+          <label>生年月日</label><br />
+          <%= @user.birth_date %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :gender, "性別" %><br />
+
+          <%= f.radio_button :gender, :male %>
+            <%= f.label :gender, "男性" %>
+          <%= f.radio_button :gender, :female %>
+            <%= f.label :gender, "女性" %>
+          <%= f.radio_button :gender, :other %>
+            <%= f.label :gender, "その他" %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :open_gender, "性別の公開" %><br />
+
+          <%= f.radio_button :open_gender, :false, checked: true %>
+            <%= f.label :open_gender, "非公開" %>
+          <%= f.radio_button :open_gender, :true %>
+            <%= f.label :open_gender, "公開" %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :nickname, "ニックネーム" %><br />
+          <%= f.text_field :nickname, autocomplete: "off" %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :self_intro, "自己紹介" %><br />
+          <%= f.text_area :self_intro, class: 'col-12', rows: '5' %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :image, "アイコン画像" %><br />
+          <%= f.file_field :image, accept: "image/*" %>
+        </div>
+
+        <div class="actions mb-3">
+          <%= f.submit "更新", class: 'btn btn-dark border mx-auto d-block col-3' %>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <%= link_to "退会", users_confirm_path, class: 'btn btn-danger border mx-auto d-block col-3' %>
+      </div>
+    </div>
+
+
+  </div>
+</div>

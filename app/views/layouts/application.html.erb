@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>Sunaba</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="h-100", style="background-color: #203744; color: #eedcb3">
+    <div class="container-fluid h-100">
+      <div class="row h-100">
+
+        <div class="col-2 shadow-lg", style="position: fixed; background-color: #202f55; height: 100%">
+          <%= render 'layouts/sidebar' %>
+        </div>
+        <div class="col-10 h-100 offset-2">
+          <%= yield %>
+        </div>
+
+      </div>
+    </div>
   </body>
 </html>

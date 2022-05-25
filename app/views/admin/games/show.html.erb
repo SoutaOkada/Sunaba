@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <h1>
+        <%= @game.game_title %>
+      </h1>
+    </div>
+    <div class="col-6">
+      <div>
+        <h3>ゲーム編集</h3>
+      </div>
+
+      <div>
+        <%= form_with model: @game, url: admin_game_path, method: :patch do |f| %>
+          <%= f.label :game_title, "タイトル" %>
+          <%= f.text_field :game_title %>
+
+          <%= f.radio_button :is_active, :true %>
+          <%= f.label :is_active, "公開" %>
+          <%= f.radio_button :is_active, :false %>
+          <%= f.label :is_active, "削除" %>
+
+          <%= f.submit "更新" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">
+
+      <div class="row">
+        <div class="col-12">
+
+          <div class="row">
+            <h2>外部リンク</h2>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <h4>リンク追加</h4>
+              </div>
+
+              <div class="row mb-3">
+                <%= form_with model: @game_link, url: admin_game_links_path(game_id: params[:id])  do |f| %>
+
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <%= f.label :link_title, "サイト名" %><br />
+                      <%= f.text_field :link_title %>
+                    </div>
+
+                    <div class="col-6">
+                      <%= f.label :link, "URL" %><br />
+                      <%= f.text_field :link %>
+                    </div>
+                  </div>
+
+                  <div class="row justify-content-end">
+                    <%= f.submit "作成", class: 'btn btn-secondary mr-4' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+        <div style="overflow-y: scroll">
+          <table class="table text-light table-dark table-striped table-sm border border-secondary">
+            <tr>
+              <th>title</th>
+              <th>url</th>
+              <th></th>
+              <th></th>
+            </tr>
+
+            <% @game_links.each do |game_link| %>
+              <tr>
+                <td><%= game_link.link_title %></td>
+                <td><%= game_link.link %></td>
+                <td><%= link_to "編集", edit_admin_game_link_path(game_link.id), class: 'btn btn-info' %></td>
+                <td><%= link_to "削除", admin_game_link_path(game_link.id), method: :delete, class: 'btn btn-danger' %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-7">
+      <table class="table text-light table-dark table-striped table-sm border border-secondary">
+        <% @posts.each do |one_post| %>
+          <tr>
+            <td><%= one_post.id %></td>
+            <td>
+              <%= link_to admin_post_path(one_post.id) do %>
+                <p style="margin:0;"><%= one_post.title %></p>
+                <p style="margin:0;"><%= one_post.created_at.strftime("%Y年%m月%d日 %H:%M") %></p>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to admin_user_path(one_post.user.id) do %>
+                <%= image_tag one_post.user.image, size: '30x30', class: 'img-thumbnail' %>
+                <%= one_post.user.nickname %>
+              <% end %>
+            </td>
+            <td>
+              <% if one_post.is_active == true %>
+                公開
+              <% else %>
+                削除
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

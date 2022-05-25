@@ -1,0 +1,36 @@
+<h2>検索結果</h2>
+
+<% if @range == "User" %>
+  <div style="overflow-y: scroll">
+    <table class="table text-light table-dark table-striped table-sm border border-secondary">
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user_path(user.id) do %>
+                <%= image_tag user.image, size: '30x30' %>
+                <%= user.nickname %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div style="overflow-y: scroll">
+    <table class="table text-light table-dark table-striped table-sm border border-secondary">
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td>
+              <%= link_to game_path(game.id) do %>
+                <%= game.game_title %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

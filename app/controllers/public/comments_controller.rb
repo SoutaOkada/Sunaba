@@ -1,8 +1,12 @@
 class Public::CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    @comment.save
-    redirect_to post_path(@comment.post.id)
+    if @comment.save
+      redirect_to post_path(@comment.post.id)
+    else
+      redirect_to request.referer
+    end
+
   end
 
   def update

@@ -21,7 +21,13 @@
             <tr>
               <td><%= user.id %></td>
 
-              <td><%= image_tag user.image, size: '40x40' %></td>
+              <td>
+                <% if user.image.attached? %>
+                  <div><%= image_tag user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                <% else %>
+                  <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                <% end %>
+              </td>
 
               <td>
                 <%= link_to admin_user_path(user.id) do %>

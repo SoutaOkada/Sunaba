@@ -8,7 +8,11 @@
           <tr>
             <td>
               <%= link_to user_path(user.id) do %>
-                <%= image_tag user.image, size: '30x30' %>
+                <% if user.image.attached? %>
+                <div><%= image_tag user.image, size: '30x30', class: 'img-thumbnail' %></div>
+              <% else %>
+                <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+              <% end %>
                 <%= user.nickname %>
               <% end %>
             </td>

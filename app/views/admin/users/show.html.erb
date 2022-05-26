@@ -8,7 +8,11 @@
         </div>
 
         <div>
-          <%= image_tag @user.image, size: '50x50', class: 'img-thumbnail' %>
+          <% if @user.image.attached? %>
+            <div><%= image_tag @user.image, size: '50x50', class: 'img-thumbnail' %></div>
+          <% else %>
+            <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+          <% end %>
         </div>
       </div>
 
@@ -55,7 +59,7 @@
 
               <tr>
                 <td>自己紹介</td>
-                <td><%= @user.self_intro %></td>
+                <td><%= safe_join(@user.self_intro.split("\n"),tag(:br)) %></td>
               </tr>
 
               <tr>
@@ -105,7 +109,11 @@
                     <tr>
                       <td>
                         <%= link_to admin_user_path(follow.follow.id) do %>
-                          <%= image_tag follow.follow.image, size:'30x30' %>
+                          <% if follow.follow.image.attached? %>
+                            <div><%= image_tag follow.follow.image, size: '30x30', class: 'img-thumbnail' %></div>
+                          <% else %>
+                            <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                          <% end %>
                           <%= follow.follow.nickname %>
                         <% end %>
                       </td>
@@ -123,7 +131,11 @@
                     <tr>
                       <td>
                         <%= link_to admin_user_path(follower.user.id) do %>
-                          <%= image_tag follower.user.image, size:'30x30' %>
+                          <% if follower.user.image.attached? %>
+                            <div><%= image_tag follower.user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                          <% else %>
+                            <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                          <% end %>
                           <%= follower.user.nickname %>
                         <% end %>
                       </td>

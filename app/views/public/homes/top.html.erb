@@ -8,7 +8,7 @@
           <div class="row h-10">
             <h3>新着ゲーム</h3>
           </div>
-          <div class="row h-90", style="overflow-y: scroll">
+          <div class="row h-90">
             <table class="table text-light table-dark table-striped table-sm border border-secondary">
               <% @games.each do |game| %>
                 <tr>
@@ -30,14 +30,18 @@
         <div class="row">
           <h3>新着ポスト</h3>
         </div>
-        <div class="row" class="row h-90", style="overflow-y: scroll">
+        <div class="row" class="row h-90">
           <table class="table text-light table-dark table-striped table-sm border border-secondary">
             <% @posts.each do |one_post| %>
               <% if one_post.user.is_active == true %>
                 <tr>
                   <td>
                     <%= link_to user_path(one_post.user.id) do %>
-                      <%= image_tag one_post.user.image, size:'30x30', class: 'img-thumbnail' %>
+                      <% if one_post.user.image.attached? %>
+                        <div><%= image_tag one_post.user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                      <% else %>
+                        <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                      <% end %>
                       <%= one_post.user.nickname %>
                     <% end %>
                     </td>
@@ -72,14 +76,18 @@
                 <div class="row h-10">
                   <h5>フォロー中ゲームの新着ポスト</h5>
                 </div>
-                <div class="row h-90", style="overflow-y: scroll">
+                <div class="row h-90">
                   <table class="table text-light table-dark table-striped table-sm border border-secondary">
                     <% @game_posts.each do |one_post| %>
                       <% if one_post.user.is_active == true %>
                         <tr>
                           <td>
                             <%= link_to user_path(one_post.user.id) do %>
-                              <%= image_tag one_post.user.image, size:'30x30', class: 'img-thumbnail' %>
+                              <% if one_post.user.image.attached? %>
+                                <div><%= image_tag one_post.user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                              <% else %>
+                                <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                              <% end %>
                               <%= one_post.user.nickname %>
                             <% end %>
                           </td>
@@ -107,7 +115,7 @@
                 <div class="row h-10">
                   <h5>フォロー中ユーザーの新着ポスト</h5>
                 </div>
-                <div class="row h-90", style="overflow-y: scroll">
+                <div class="row h-90">
                   <table class="table text-light table-dark table-striped table-sm border border-secondary">
                     <% @user_posts.each do |one_post| %>
                       <% if one_post.user.is_active == true %>
@@ -144,7 +152,7 @@
 
     <% else %>
 
-      <div class="col-md-4">
+      <div class="col-md-4 d-flex align-items-center">
         <div class="row">
           <div class="col-12 mt-10">
             <div style="margin-bottom:20px">

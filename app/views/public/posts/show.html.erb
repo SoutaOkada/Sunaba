@@ -8,7 +8,11 @@
           <div class="row">
             <div class="col-5">
               <%= link_to user_path(@post.user.id) do %>
-                <%= image_tag @post.user.image, size:'30x30', class: 'img-thumbnail' %>
+                <% if @post.user.image.attached? %>
+                  <div><%= image_tag @post.user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                <% else %>
+                  <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                <% end %>
                 <%= @post.user.nickname %>
               <% end %>
             </div>
@@ -39,7 +43,7 @@
       <div class="row">
         <div class="w-100 p-1 border border-dark bg-secondary text-light">
           <p>
-            <%= @post.post_text %>
+            <%= safe_join(@post.post_text.split("\n"),tag(:br)) %>
           </p>
         </div>
       </div>
@@ -78,7 +82,11 @@
                       <div class="justify-content-center">
                         <% if comment.is_active == true %>
                           <%= link_to user_path(comment.user.id) do %>
-                            <%= image_tag comment.user.image, size: '30x30', class: 'img-thumbnail' %><br />
+                            <% if comment.user.image.attached? %>
+                              <div><%= image_tag comment.user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                            <% else %>
+                              <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                            <% end %>
                             <%= comment.user.nickname %>
                           <% end %>
                         <% end %>
@@ -95,7 +103,7 @@
                       <% elsif comment.is_active == false %>
                         <p>削除されたコメントです</p>
                       <% else %>
-                        <p><%= comment.text %></p>
+                        <p><%= safe_join(comment.text.split("\n"),tag(:br)) %></p>
                         <p><%= comment.created_at.strftime("%m月%d日 %H:%M") %></p>
                       <% end %>
                     </div>

@@ -2,7 +2,11 @@
 
   <div class="row mb-3">
     <div class="col-1">
-      <%= image_tag @user.image, size: '80x80', class: 'img-thumbnail' %>
+      <% if @user.image.attached? %>
+        <div><%= image_tag @user.image, size: '80x80', class: 'img-thumbnail' %></div>
+      <% else %>
+        <div><%= image_tag '20200501_noimage', size: '80x80', class: 'img-thumbnail' %></div>
+      <% end %>
     </div>
     <div class="col-7">
       <% if current_user.id == @user.id %>
@@ -103,7 +107,11 @@
                     <tr>
                       <td>
                         <%= link_to user_path(follow.follow.id) do %>
-                          <%= image_tag follow.follow.image, size:'30x30' %>
+                          <% if follow.follow.image.attached? %>
+                            <div><%= image_tag follow.follow.image, size: '30x30', class: 'img-thumbnail' %></div>
+                          <% else %>
+                            <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                          <% end %>
                           <%= follow.follow.nickname %>
                         <% end %>
                       </td>
@@ -123,7 +131,11 @@
                     <tr>
                       <td>
                         <%= link_to user_path(follower.user.id) do %>
-                          <%= image_tag follower.user.image, size:'30x30' %>
+                          <% if follower.user.image.attached? %>
+                            <div><%= image_tag follower.user.image, size: '30x30', class: 'img-thumbnail' %></div>
+                          <% else %>
+                            <div><%= image_tag '20200501_noimage', size: '30x30', class: 'img-thumbnail' %></div>
+                          <% end %>
                           <%= follower.user.nickname %>
                         <% end %>
                       </td>

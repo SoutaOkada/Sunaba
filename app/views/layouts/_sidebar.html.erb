@@ -44,7 +44,12 @@
     <div class="row">
       <%= link_to user_path(current_user.id), style: 'text-align: center; margin: 0 auto' do %>
         <div class="mb-3">
-          <div><%= image_tag current_user.image, size: '80x80', class: 'img-thumbnail' %></div>
+          <% if current_user.image.attached? %>
+            <div><%= image_tag current_user.image, size: '80x80', class: 'img-thumbnail' %></div>
+          <% else %>
+            <div><%= image_tag '20200501_noimage', size: '80x80', class: 'img-thumbnail' %></div>
+          <% end %>
+
           <div><%= current_user.nickname %></div>
         </div>
       <% end %>

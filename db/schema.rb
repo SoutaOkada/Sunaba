@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 2022_05_19_163150) do
   end
 
   create_table "post_favs", force: :cascade do |t|
+    t.string "text"
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "game_id"

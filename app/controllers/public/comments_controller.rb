@@ -11,8 +11,12 @@ class Public::CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.update(comment_params)
-    redirect_to post_path(@comment.post.id)
+    if @comment.user_id == current_user.id
+      @comment.update(comment_params)
+      redirect_to post_path(@comment.post.id)
+    else
+      redirect_to request.referer
+    end
   end
 
   private

@@ -4,6 +4,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post.id)
     else
+      flash[:notice] = "タイトル・本文を入力してください。"
       redirect_to request.referer
     end
   end

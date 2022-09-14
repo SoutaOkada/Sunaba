@@ -80,6 +80,8 @@
                         <%= f.label :post_text, "本文" %><br />
                         <%= f.text_area :post_text, class: 'col-12', rows: '5' %><br />
 
+                        <%= flash[:notice] %>
+
                         <%= f.submit "投稿", class: 'btn btn-dark border mx-auto d-block col-3' %>
                       <% end %>
                   </div>
